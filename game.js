@@ -37,8 +37,8 @@ loadSprite("man", "assets/runmananime_withoutfall100.png", {
 loadSprite("bags", "assets/bag.png");
 //loadSprite("city", "assets/TrainBG.png");
 loadSprite("coin", "assets/coin.png");
-//loadSprite("boost", "assets/booster.png");
-Booster();
+loadSprite("boost", "assets/booster.png");
+
 
 
 // For scenes
