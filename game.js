@@ -9,8 +9,6 @@ import kaboom from "https://unpkg.com/kaboom/dist/kaboom.mjs";
     background: [ 0, 0, 0, "assets/TrainBG.png"],
 });
 
-//import {Booster} from './main.js';
-
 const FLOOR_HEIGHT = 48;
 const JUMP_FORCE = 800;
 
