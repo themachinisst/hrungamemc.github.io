@@ -260,7 +260,7 @@ scene("game", () => {
             SPEED = SPEED/2;
             BagCollide = true;
         };
-/*
+
         // lose if player collides with any game obj with tag "bag"
         if(BagCollide){
             player.collides("bag", () => {
@@ -270,7 +270,7 @@ scene("game", () => {
                 burp();
             });
         };
-*/
+
         if(stamina == 5){
             //go("station", stamina);//go to "station level"
             go("lose", Math.floor(score));// go to "los
