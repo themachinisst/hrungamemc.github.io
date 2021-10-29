@@ -95,7 +95,7 @@ scene("game", () => {
             outline(4),
             origin("botleft"),
             layer("top"),
-            scale(2.3), //for 100x100
+            scale(2), //for 100x100
             //scale(0.5),for 1080
             area(),
             body(),
@@ -164,7 +164,7 @@ scene("game", () => {
                     area(),
                     origin("botleft"),
                     layer("top"),
-                    scale(0.8),
+                    scale(0.5),
                     move(LEFT, SPEED),
                     cleanup(2),
                     "bag", // add a tag here
