@@ -15,7 +15,7 @@ const JUMP_FORCE = 600;
 
 
 
-/*
+
 loadSprite("man", "assets/FinalCharImages/FinalMalesprite_100x100/runmananime.png", {
     sliceX: 16,
     sliceY: 1,
@@ -35,8 +35,8 @@ loadSprite("man", "assets/FinalCharImages/FinalMalesprite_100x100/runmananime.pn
         },
     }
 });
-*/
 
+/*
 loadSprite("man", "assets/runmananime.png", {
     sliceX: 24,
     sliceY: 1,
@@ -52,7 +52,7 @@ loadSprite("man", "assets/runmananime.png", {
         },
     }
 });
-
+*/
 loadSprite("bag1", "assets/bags/bag1.png");
 loadSprite("bag2", "assets/bags/bag2.png");
 loadSprite("bag3", "assets/bags/bag3.png");
@@ -106,7 +106,7 @@ scene("game", (stamina, score, currency, SPEED) => {
         ], "top");
 
         gravity(1800);
-/*
+
         const player = add([
             sprite("man", {
                 anims: "run",
@@ -119,8 +119,8 @@ scene("game", (stamina, score, currency, SPEED) => {
             area(),
             body(),
         ]);
-*/
 
+/*
         const player = add([
             sprite("man", {
                 anims: "run",
@@ -134,7 +134,7 @@ scene("game", (stamina, score, currency, SPEED) => {
             area(),
             body(),
         ]);
-
+*/
         //For jump
         function jump(){
             if (player.grounded()){
