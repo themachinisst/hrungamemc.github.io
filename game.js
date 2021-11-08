@@ -60,6 +60,8 @@ loadSprite("bag3", "assets/bags/bag3.png");
 
 loadSprite("train", "assets/trainBack.png");
 loadSprite("city", "assets/bgdouble.png");
+loadSprite("test", "assets/test.png");
+
 
 loadSprite("coin", "assets/coin_sprite.png", {
     sliceX: 10,
@@ -119,6 +121,17 @@ scene("game", (stamina, score, currency, SPEED) => {
             area(),
             body(),
         ]);
+ 
+      const test = add([
+                sprite("test"),
+                pos(200, height()),
+                origin("botleft"),
+                layer("top"),
+                scale(0.5), //for 100x100
+                //scale(0.5),//for 1080
+                area(),
+                body(),
+            ]);
 
 /*
         const player = add([
