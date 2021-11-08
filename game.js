@@ -120,17 +120,7 @@ scene("game", (stamina, score, currency, SPEED) => {
             area(),
             body(),
         ]);
- 
-      const test = add([
-                sprite("test"),
-                pos(200, height()),
-                origin("botleft"),
-                layer("top"),
-                scale(0.3), //for 100x100
-                //scale(0.5),//for 1080
-                area(),
-                body(),
-            ]);
+
 
 /*
         const player = add([
