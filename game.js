@@ -79,7 +79,7 @@ loadSprite("coin", "assets/coin_sprite.png", {
 loadSprite("boost", "assets/booster.png");
 //Booster();
 //For station assets
-loadSprite("StationBack", "assets/station/stallbg.png");
+loadSprite("StationBack", "assets/stallbg.png");
 loadSprite("vadapav", "assets/station/vadapavstall.png");
 loadSprite("nimbu", "assets/station/nimbupaani.png");
 loadSprite("chai", "assets/station/teastall.png");
