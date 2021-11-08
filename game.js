@@ -16,7 +16,7 @@ const JUMP_FORCE = 600;
 
 
 
-loadSprite("man", "assets/FinalCharImages/FinalMalesprite_100x100/runmananime.png", {
+loadSprite("man", "assets/runmananime100.png", {
     sliceX: 16,
     sliceY: 1,
     anims:{
