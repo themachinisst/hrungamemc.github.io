@@ -1,0 +1,23 @@
+
+
+form {
+  position: fixed;
+  left: 50%;
+  max-width: 80%;
+  bottom:50%;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+}
+
+.char{
+  position: fixed;
+  left: 50%;
+  max-width: 80%;
+  bottom:50%;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+}
+
+.hide{
+  display: none;
+}
