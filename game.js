@@ -179,7 +179,22 @@ scene("game", (stamina, score, currency, SPEED) => {
             move(LEFT, SPEED),
             layer("mid"),
         ]);
-        
+         
+        //add background train loop
+        for(let i=0;i<50;i++){
+            add([
+                sprite("train"),
+                pos(width()*i +10, 0),
+                origin("topleft"),
+                area(),
+                scale(0.9),
+                move(LEFT, SPEED),
+                layer("mid"),
+                area(),
+                "train"
+            ]);
+        }
+  
         //add background city
         add([
             sprite("city"),
