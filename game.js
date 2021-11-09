@@ -184,7 +184,7 @@ scene("game", (stamina, score, currency, SPEED) => {
         for(let i=0;i<20;i++){
             add([
                 sprite("train"),
-                pos(width()*2+100, 0),
+                pos(width()*i+100, 0),
                 origin("topleft"),
                 area(),
                 scale(0.9),
