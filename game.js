@@ -172,10 +172,10 @@ scene("game", (stamina, score, currency, SPEED) => {
         //add background train
         add([
             sprite("train"),
-            pos(0, 100),
+            pos(0, 0),
             origin("topleft"),
             area(),
-            scale(0.73),
+            scale(0.9),
             move(LEFT, SPEED),
             layer("mid"),
         ]);
