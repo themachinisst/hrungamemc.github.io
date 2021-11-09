@@ -117,7 +117,8 @@ scene("game", (stamina, score, currency, SPEED) => {
             origin("botleft"),
             layer("top"),
             //scale(1.5), //for 100x100
-            scale(0.3),//for 1080
+            //scale(0.3),//for 1080
+            scale(0.8),//for 200
             area(),
             body(),
         ]);
