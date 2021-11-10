@@ -216,7 +216,7 @@ scene("game", (stamina, score, currency, SPEED) => {
                     //add bags 
             add([
                     sprite(choose(["bag1", "bag2", "bag3"])),
-                    pos(width()+rand(500, 600), height()),
+                    pos(width()+rand(500, 600), height()-20),
                     area(),
                     origin("botleft"),
                     layer("top"),
