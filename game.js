@@ -60,7 +60,7 @@ loadSprite("bag3", "assets/bags/bag3.png");
 
 //loadSprite("train", "assets/trainBack.png");
 loadSprite("train", "assets/test.png");
-loadSprite("city", "assets/bgdouble.png");
+loadSprite("city", "assets/bg.png");
 
 
 loadSprite("coin", "assets/coin_sprite.png", {
