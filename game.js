@@ -170,7 +170,7 @@ scene("game", (stamina, score, currency, SPEED) => {
         
 
        //add background city
-       for(let j=0; j<5; j++){
+       for(let j=0; j<10; j++){
           add([
               sprite("city"),
               pos(1200*j,0),
