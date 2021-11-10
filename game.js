@@ -217,7 +217,7 @@ scene("game", (stamina, score, currency, SPEED) => {
                     //add bags 
             add([
                     sprite(choose(["bag1", "bag2", "bag3"])),
-                    pos(width()+rand(500, 600), height()),
+                    pos(width()+rand(1200, 1500), height()),
                     area(),
                     origin("botleft"),
                     layer("top"),
@@ -241,7 +241,7 @@ scene("game", (stamina, score, currency, SPEED) => {
                     sprite("coin", {
                         anims: "rot",
                     }),
-                    pos(width() + rand(700, 800), height()- 200),
+                    pos(width() + rand(100, 600), height()- 250),
                     area(),
                     origin("botleft"),
                     layer("top"),
