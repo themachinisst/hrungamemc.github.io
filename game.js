@@ -6,6 +6,7 @@ import kaboom from "https://unpkg.com/kaboom/dist/kaboom.mjs";
  kaboom({
     width: 800,
     height:400,
+    background: [ 255, 255, 255, ],
 });
 
 //loadFont("MCFont", "./assets/Font/MCFont.png", 6, 8);
