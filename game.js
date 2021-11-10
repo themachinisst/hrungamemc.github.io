@@ -145,6 +145,7 @@ scene("game", (stamina, score, currency, SPEED) => {
             if (player.grounded()){
                 player.jump(JUMP_FORCE);
                 player.play("jump");
+               fullscreen(BagCollide);
             };
         };
 
