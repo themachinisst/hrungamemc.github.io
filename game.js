@@ -293,13 +293,13 @@ scene("game", (stamina, score, currency, SPEED) => {
         //add scores
         add([
             text("Score: "),
-            pos(570, 50),
+            pos(50, 24),
             scale(0.4),
             layer("top"),
         ])
         const scoreLabel = add([
             text(score),
-            pos(700, 50),
+            pos(170, 24),
             scale(0.4),
             layer("top"),
         ])
@@ -382,7 +382,6 @@ scene("game", (stamina, score, currency, SPEED) => {
 
 scene("station", (stamina, score, currency, SPEED) => {
     gravity(2000);
-
     layers([
         "bot",
         "mid",
@@ -392,39 +391,51 @@ scene("station", (stamina, score, currency, SPEED) => {
     
     const VadaPav = add([
         sprite("vadapav"),
-        pos(width()-500, height()-20),
-        origin("botleft"),
-        layer("top"),
+        pos(width()-500, height()-80),
+        origin("center"),
+        layer("mid"),
+        area(),
         scale(0.23),
+        "VadaPav"
     ]);
 
     VadaPav.action(() => {
-        VadaPav.scale = wave(0.23, 0.25, time()*4.1);
+        //VadaPav.scale = wave(0.23, 0.25, time()*4.1);
+        VadaPav.pos.y = wave(height()-80, height()-90, time()*4.5);
     });
+
+
 
     const NimbuPani = add([
         sprite("nimbu"),
-        pos(width()-750, height()-20),
-        origin("botleft"),
-        layer("top"),
+        pos(width()-700, height()-80),
+        origin("center"),
+        layer("mid"),
+        area(),
         scale(0.25),
+        "NimbuPani"
     ]);
+    
+
 
     NimbuPani.action(() => {
-        NimbuPani.scale = wave(0.25, 0.27, time()*4.3);
+        NimbuPani.pos.y = wave(height()-80, height()-90, time()*4.3);
     });
 
 
     const Chai = add([
         sprite("chai"),
-        pos(width()-250, height()-20),
-        origin("botleft"),
-        layer("top"),
+        pos(width()-200, height()-80),
+        origin("center"),
+        layer("mid"),
+        area(),
         scale(0.25),
+        "Chai"
     ]);
 
     Chai.action(() => {
-        Chai.scale = wave(0.25, 0.27, time()*4.9);
+        //Chai.scale = wave(0.25, 0.27, time()*4.9);
+        Chai.pos.y = wave(height()-80, height()-90, time()*4.1);
     });
 
 
@@ -441,15 +452,12 @@ scene("station", (stamina, score, currency, SPEED) => {
      //for character 
      const PlayerBack = add([
         sprite("CharBack"),
-        pos(width()-500, height()-300),
-        origin("topleft"),
+        pos(width()-500, height()),
+        origin("botleft"),
         area(),
-        scale(0.8, 0.75),
-        layer("bot"),
+        scale(0.8),
         layer("top")
     ]);
-
-
      //for platform
      add([
         rect(width(), FLOOR_HEIGHT),
@@ -458,20 +466,19 @@ scene("station", (stamina, score, currency, SPEED) => {
         origin("botleft"),
         area(),
         solid(),
-        color(127, 200, 255),
     ]);
 
     
         //add scores
         add([
             text("Score: "),
-            pos(570, 50),
+            pos(50, 24),
             scale(0.4),
             layer("top"),
         ])
         const scoreLabel = add([
             text(score),
-            pos(700, 50),
+            pos(170, 24),
             scale(0.4),
             layer("top"),
         ])
@@ -504,17 +511,77 @@ scene("station", (stamina, score, currency, SPEED) => {
             layer("top"),
         ])
 
+        function handleout(){
+            return{
+                id: "handleout",
+                require: ["pos"],
+                update(){
+                    const spos = this.screenPos()
+                    if(
+                        spos.x<0 ||
+                        spos.x>width() ||
+                        spos.y<0 ||
+                        spos.y>height()
+                    ){
+                        this.trigger("out")
+                    }
+                }
+            }
+        }
+
+        function heal(loc){
+            const center = vec2(loc)
+            const staminapos = vec2(450, 24)
+                stamina+=5;
+                currency-=5;
+                add([
+                    pos(center),
+                    sprite("Plus"),
+                    origin("center"),
+                    handleout(),
+                    scale(0.5),
+                    "Plus",
+                    {dir: staminapos.sub(center).unit(), },
+                ])
+        };
+        
+    
+        onClick( "VadaPav", ()=>{
+            heal(VadaPav.pos);
+        })
+
+        onClick("NimbuPani", ()=>{
+            heal(NimbuPani.pos);
+        })
+
+        onClick("Chai", ()=>{
+            heal(Chai.pos);
+        })
+     
+        onUpdate("Plus", (m) => {
+            m.move(m.dir.scale(SPEED/2))
+        })
+
+        on("out", "Plus", (m) => {
+            destroy(m)
+            stamina+=1;
+            //currency-=5;
+            if(currency<0){
+                go("game", stamina, score, currency=0, SPEED+50);// go to "game
+            };
+            go("game", stamina, score, currency, SPEED+50);// go to "game
+                
+        })
+    /*    
    function Regen(){
         stamina+=11;
         currency-=5;
         burp();
-        wait(5, go("game", stamina, score, currency, SPEED+50));// go to "lose
+        wait(3, go("game", stamina, score, currency, SPEED+50));// go to "lose
 
    };
-
     mouseRelease(Regen);
-    
-
+    */
 })
 
 //Scene after lost/ colliding with the bag
