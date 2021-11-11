@@ -100,7 +100,7 @@ let currency = 0;
 let stamina = 11;
 
 scene("game", (stamina, score, currency, SPEED) => {
-    
+    let Damage = 0;
     let BagCollide = true;
         layers([
             "bot",
@@ -227,7 +227,7 @@ scene("game", (stamina, score, currency, SPEED) => {
                     "bag", // add a tag here
                 ]);
             // wait a random amount of time to spawn next tree
-            wait(rand(1, 4), (spawnBags));
+            wait(rand(2, 4), (spawnBags));
             
         }
 
@@ -241,7 +241,7 @@ scene("game", (stamina, score, currency, SPEED) => {
                     sprite("coin", {
                         anims: "rot",
                     }),
-                    pos(width() + rand(100, 600), height()- 250),
+                    pos(width() + rand(100, 600), height()- rand(200, 300)),
                     area(),
                     origin("botleft"),
                     layer("top"),
@@ -278,7 +278,6 @@ scene("game", (stamina, score, currency, SPEED) => {
                 layer("top"),
                 scale(0.4),
                 move(LEFT, SPEED),
-                cleanup(2),
                 
                 "boost", // add a tag here
             ]);
@@ -336,23 +335,34 @@ scene("game", (stamina, score, currency, SPEED) => {
         //after colliding with boosters
         player.collides("boost", () => {
             BagCollide = false; 
-            SPEED = SPEED + 50;
-            setTimeout(Boostfunc, 5000);
+            SPEED = SPEED + 500;
+            JUMP_FORCE += 200;
+            setTimeout(Boostfunc, 7000);
         });
 
         function Boostfunc(){
-            SPEED = SPEED - 50;
+            SPEED = SPEED - 500;
             BagCollide = true;
+            JUMP_FORCE -= 200;
         };
 
         // lose if player collides with any game obj with tag "bag"
         if(BagCollide){
-            player.collides("bag", () => {
-                shake();
-                destroy(player);
-                go("lose", Math.floor(score));// go to "lose" scene here
-                burp();
-            });
+                player.collides("bag", () => {
+                    //staminaLabel.color = hsl2rgb(wave(0, 0.2*Damage , time(1)), 0.5, 0.5);
+                    Damage+=1;
+                    shake(10);
+                    stamina-=10;
+                    if(Damage==3){
+                        shake();
+                        destroy(player);
+                        go("lose", Math.floor(score));// go to "lose" scene here
+                        burp();
+                        shake(10);
+                        Damage = 0;
+                        
+                    };
+                });
         };
 
 
@@ -361,15 +371,14 @@ scene("game", (stamina, score, currency, SPEED) => {
         action(() => {
             score+=0.2;
             scoreLabel.text = Math.floor(score) ;
-            //for increasing speed every 400        
-            /*if (score%50==0){
-                SPEED=SPEED+500;
-            };*/
+            scoreLabel.color = rgb(255, 255, 255);
 
             currencyLabel.text = currency;
-              //stamina calc
-            stamina = stamina - (0.02);
+            currencyLabel.color = rgb(255, 215, 0);
+            //stamina calc
+            stamina = stamina - (0.01);
             staminaLabel.text = Math.floor(stamina); 
+            staminaLabel.color = rgb( 255*Damage, 255 - 155*Damage, 0);
             if(stamina < 1){
                 if(currency>=5){
                     go("station",Math.floor(stamina), Math.floor(score), currency, SPEED);// go to "lose
