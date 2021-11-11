@@ -97,7 +97,7 @@ loadSound("coinsound", "./assets/audio/Pick Coin.mp3");
 let SPEED = 600;    
 let score = 0; 
 let currency = 0;
-let stamina = 11;
+let stamina = 51;
 let JUMP_FORCE = 600;
 
 scene("game", (stamina, score, currency, SPEED) => {
