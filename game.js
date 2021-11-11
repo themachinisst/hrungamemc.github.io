@@ -60,8 +60,8 @@ loadSprite("bag3", "assets/bags/bag3.png");
 
 
 //loadSprite("train", "assets/trainBack.png");
-//loadSprite("train", "assets/test.png");
-loadSprite("train", "assets/doubletrain.png");
+loadSprite("train", "assets/test.png");
+//loadSprite("train", "assets/doubletrain.png");
 loadSprite("city", "assets/bg.png");
 
 
@@ -173,7 +173,7 @@ scene("game", (stamina, score, currency, SPEED) => {
         
 
        //add background city
-       for(let j=0; j<10; j++){
+       for(let j=0; j<30; j++){
           add([
               sprite("city"),
               pos(1200*j,0),
@@ -187,7 +187,7 @@ scene("game", (stamina, score, currency, SPEED) => {
       };
          
         //add background train loop
-        for(let i=0;i<30;i+=2){
+        for(let i=0;i<50;i+=2){
             add([
                 sprite("train"),
                 pos((850)*i, 0),
