@@ -12,7 +12,7 @@ import kaboom from "https://unpkg.com/kaboom/dist/kaboom.mjs";
 //loadFont("MCFont", "./assets/Font/MCFont.png", 6, 8);
 
 const FLOOR_HEIGHT = 0;//48;
-const JUMP_FORCE = 600;
+
 
 
 
@@ -98,6 +98,7 @@ let SPEED = 600;
 let score = 0; 
 let currency = 0;
 let stamina = 11;
+let JUMP_FORCE = 600;
 
 scene("game", (stamina, score, currency, SPEED) => {
     let Damage = 0;
