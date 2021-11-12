@@ -411,7 +411,14 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
                         burp();
                         shake(10);
                         Damage = 0;
-                        
+                    };
+                    if(Damage>0 && stamina<=10){
+                        shake();
+                        destroy(player);
+                        go("lose", Math.floor(score));// go to "lose" scene here
+                        burp();
+                        shake(10);
+                        Damage = 0;
                     };
                 });
         };
