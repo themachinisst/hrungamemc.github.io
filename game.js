@@ -63,8 +63,8 @@ loadSprite("bag3", "assets/bags/bag3.png");
 loadSprite("train", "assets/test.png");
 //loadSprite("train", "assets/doubletrain.png");
 loadSprite("city", "assets/bg.png");
-
-
+loadSprite("coin", "assets/coin.png");
+/*
 loadSprite("coin", "assets/coin_sprite.png", {
     sliceX: 10,
     sliceY: 1,
@@ -80,6 +80,7 @@ loadSprite("coin", "assets/coin_sprite.png", {
         }
     }
 });
+*/
 loadSprite("boost", "assets/booster.png");
 //Booster();
 //For station assets
@@ -93,6 +94,9 @@ loadSprite("Plus", "assets/station/plus.png");
 //For sound
 loadSound("coinsound", "./assets/audio/Pick Coin.mp3");
 
+//For menu assets 
+loadSprite("Male", "assets/MaleChar.png");
+loadSprite("Female", "assets/FemaleChar.png");
 // For scenes
 
 let SPEED = 600;    
@@ -100,8 +104,9 @@ let score = 0;
 let currency = 0;
 let stamina = 51;
 let JUMP_FORCE = 600;
+let Gender = 0;
 
-scene("game", (stamina, score, currency, SPEED) => {
+scene("game", (stamina, score, currency, SPEED, Gender) => {
     let Damage = 0;
     let BagCollide = true;
         layers([
@@ -236,12 +241,55 @@ scene("game", (stamina, score, currency, SPEED) => {
         //start spawning bags
         spawnBags();
     
+        function handleoutCoin(){
+            return{
+                id: "handleoutCoin",
+                require: ["pos"],
+                update(){
+                    const spos = this.screenPos()
+                    if(
+                        spos.x<0 ||
+                        spos.x>width() ||
+                        spos.y<0 ||
+                        spos.y>height()
+                    ){
+                        this.trigger("out")
+                    }
+                }
+            }
+        }
+
+        function AnimCoin(loc){
+            const center = vec2(loc)
+            const staminapos = vec2(720, 40)
+                //currency+=5;
+                add([
+                    pos(center),
+                    sprite("coin"),
+                    origin("center"),
+                    handleoutCoin(),
+                    scale(0.4),
+                    "SendCoin",
+                    {dir: staminapos.sub(center).unit(), },
+                ])
+        };
+
+        onUpdate("SendCoin", (m) => {
+            m.move(m.dir.scale(100))
+        })
+
+        on("out", "SendCoin", (m) => {
+            destroy(m)   
+        })
+
+        var CoinPos = 0       
+ 
         //For adding coins
         function spawnCoins(){
                     //add coins  
                 const coin = add([
                     sprite("coin", {
-                        anims: "rot",
+                       // anims: "rot",
                     }),
                     pos(width() + rand(100, 600), height()- rand(200, 300)),
                     area(),
@@ -251,16 +299,18 @@ scene("game", (stamina, score, currency, SPEED) => {
                     move(LEFT, SPEED),
                     "coin", // add a tag here
                 ]);
-                coin.play("rot");
+                //coin.play("rot");
 
             //add score for every coin
-            player.collides("coin", () => {
-                currency = currency + 5;
-                coin.destroy();
-                play("coinsound", {
-                    volume: 0.5
+                CoinPos = coin.pos
+                var coinHeight = coin.pos.y
+                player.collides("coin", () => {
+                    coin.destroy();
                 });
-            });
+            
+            coin.action(()=>{
+                coin.pos.y = wave(coinHeight, coinHeight-20, time()*5);
+            })
                 
             // wait a random amount of time to spawn next tree
             wait(rand(4, 5), (spawnCoins));
@@ -367,6 +417,15 @@ scene("game", (stamina, score, currency, SPEED) => {
                 });
         };
 
+        player.collides("coin", () => {
+                    currency = currency + 5;
+                    //AnimCoin(CoinPos);
+                    CoinPos = vec2(720, 100)
+                    AnimCoin(CoinPos);
+                    play("coinsound", {
+                        volume: 0.5
+                    });
+                });
 
 
         // increment score every frame
@@ -579,9 +638,9 @@ scene("station", (stamina, score, currency, SPEED) => {
             stamina+=1;
             //currency-=5;
             if(currency<0){
-                go("game", stamina, score, currency=0, SPEED+50);// go to "game
+                go("game", stamina, score, currency=0, SPEED+50, Gender);// go to "game
             };
-            go("game", stamina, score, currency, SPEED+50);// go to "game
+            go("game", stamina, score, currency, SPEED+50, Gender);// go to "game
                 
         })
     /*    
@@ -589,7 +648,7 @@ scene("station", (stamina, score, currency, SPEED) => {
         stamina+=11;
         currency-=5;
         burp();
-        wait(3, go("game", stamina, score, currency, SPEED+50));// go to "lose
+        wait(3, go("game", stamina, score, currency, SPEED+50, Gender));// go to "lose
 
    };
     mouseRelease(Regen);
@@ -623,10 +682,45 @@ scene("lose",  (score) => {
     ]);
 
     // go back to game with space is pressed
-    keyPress("space", () => go("game", stamina, score=0, currency, SPEED));
-    mouseClick(() => go("game", stamina, score=0, currency, SPEED));
+    keyPress("space", () => go("game", stamina, score=0, currency, SPEED, Gender));
+    mouseClick(() => go("game", stamina, score=0, currency, SPEED, Gender));
 
 });
+
+
+
+scene("menu", () => {
+
+
+    const Male = add([
+        sprite("Male"),
+        pos(0, 0),
+        origin("topleft"),
+        scale(1.5), //for 100x100
+        area(),
+        "Male"
+    ])
+
+    const Female = add([
+        sprite("Female"),
+        pos(width()/2, 0),
+        origin("topleft"),
+        scale(1.5), //for 100x100
+        area(),
+        "Female"
+    ])
+
+    onClick("Male", ()=>{
+        go("game", stamina = 51, score = 0, currency = 0, SPEED = 600, Gender = 1);
+    })
+
+    onClick( "Female", ()=>{
+        Gender = 1;
+        go("game", stamina = 51, score = 0, currency = 0, SPEED = 600, Gender = 1);
+    })
+})
+
 //go("station");
-go("game", stamina, score, currency, SPEED);
+go("menu");
+//go("game", stamina, score, currency, SPEED);
 //go("menu");
