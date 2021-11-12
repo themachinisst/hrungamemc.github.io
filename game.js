@@ -689,7 +689,7 @@ scene("lose",  (score) => {
 
 scene("menu", () => {
 
-    fullscreen(true)
+    
     const Male = add([
         sprite("Male"),
         pos(0, 0),
@@ -710,11 +710,13 @@ scene("menu", () => {
 
     onClick("Male", ()=>{
         go("game", stamina = 51, score = 0, currency = 0, SPEED = 600, Gender = 1);
+        fullscreen(true);
     })
 
     onClick( "Female", ()=>{
         Gender = 1;
         go("game", stamina = 51, score = 0, currency = 0, SPEED = 600, Gender = 1);
+        fullscreen(true);
     })
 })
 
