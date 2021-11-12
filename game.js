@@ -732,7 +732,7 @@ scene("menu", () => {
     ])
 
     onClick("Male", ()=>{
-        go("game", stamina = 51, score = 0, currency = 0, SPEED = 500, Gender = 1);
+        go("game", stamina = 51, score = 0, currency = 0, SPEED = 500, Gender = 0);
         //fullscreen(true);
         fullscreen(true);
     })
