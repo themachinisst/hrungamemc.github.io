@@ -5,7 +5,7 @@ import kaboom from "https://unpkg.com/kaboom/dist/kaboom.mjs";
  // initialize kaboom context
  kaboom({
     width: 1200,
-    height:400,
+    height:800,
     background: [ 255, 255, 255, ],
 });
 
