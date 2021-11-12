@@ -95,7 +95,13 @@ loadSound("coinsound", "./assets/audio/Pick Coin.mp3");
 //For menu assets 
 loadSprite("Male", "assets/MaleChar.png");
 loadSprite("Female", "assets/FemaleChar.png");
-// For scenes
+
+
+//For ingame text 
+loadSprite("CoinsLabel", "assets/coins_text.png");
+loadSprite("ScoreLabel", "assets/score_text.png");
+loadSprite("StaminaLabel", "assets/stamina_text.png");
+loadSprite("Retry_label", "assets/try_again.png");
 
 let SPEED = 500;    
 let score = 0; 
@@ -347,9 +353,9 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
     
         //add scores
         add([
-            text("Score: "),
+            sprite("ScoreLabel"),
             pos(50, 24),
-            scale(0.4),
+            scale(0.12),
             layer("top"),
         ])
         const scoreLabel = add([
@@ -361,10 +367,12 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
         
         //add stamina label
         add([
-            text("Stamina: "),
+
+            sprite("StaminaLabel"),
             pos(300, 24),
-            scale(0.4),
+            scale(0.12),
             layer("top"),
+            
         ])
         const staminaLabel = add([
             text(stamina),
@@ -373,11 +381,12 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
             layer("top"),
         ])
 
+        
         //add currency label    
         add([
-            text("Coins: "),
+            sprite("CoinsLabel"),
             pos(570, 24),
-            scale(0.4),
+            scale(0.12),
             layer("top"),
         ])
         const currencyLabel = add([
@@ -386,6 +395,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
             scale(0.4),
             layer("top"),
         ])
+
 
         //after colliding with boosters
         player.collides("boost", () => {
@@ -550,11 +560,11 @@ scene("station", (stamina, score, currency, SPEED) => {
     ]);
 
     
-        //add scores
+      //add scores
         add([
-            text("Score: "),
+            sprite("ScoreLabel"),
             pos(50, 24),
-            scale(0.4),
+            scale(0.12),
             layer("top"),
         ])
         const scoreLabel = add([
@@ -566,10 +576,12 @@ scene("station", (stamina, score, currency, SPEED) => {
         
         //add stamina label
         add([
-            text("Stamina: "),
+
+            sprite("StaminaLabel"),
             pos(300, 24),
-            scale(0.4),
+            scale(0.12),
             layer("top"),
+            
         ])
         const staminaLabel = add([
             text(stamina),
@@ -578,11 +590,12 @@ scene("station", (stamina, score, currency, SPEED) => {
             layer("top"),
         ])
 
+        
         //add currency label    
         add([
-            text("Coins: "),
+            sprite("CoinsLabel"),
             pos(570, 24),
-            scale(0.4),
+            scale(0.12),
             layer("top"),
         ])
         const currencyLabel = add([
@@ -591,6 +604,7 @@ scene("station", (stamina, score, currency, SPEED) => {
             scale(0.4),
             layer("top"),
         ])
+
 
         function handleout(){
             return{
@@ -667,27 +681,24 @@ scene("station", (stamina, score, currency, SPEED) => {
 
 //Scene after lost/ colliding with the bag
 scene("lose",  (score) => {
-    add([
-        text("Try Again !",{
-            size:48,
-        }),
+     add([
+        sprite("Retry_label"),
         pos(width()/4, height()/2 - 80),
         origin("center"),
+        scale(0.25),
+        "retry"
     ]);
 
     add([
-        text("Score : ",{
-            size:40,
-        }),
+        sprite("ScoreLabel"),
         pos(width()/4-50, height()/2),
+        scale(0.25),
         origin("center"),
     ]);
 
     add([
-        text(score,{
-            size:40,
-        }),
-        pos(width()/4 + 80, height()/2),
+        text(score),
+        pos(width()/4 + 150, height()/2+10),
         origin("center"),
     ]);
 
