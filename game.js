@@ -321,7 +321,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
         //For spawning boosters
         function spawnBoost(){
                 //add coins 
-            add([
+            var Boost = add([
                 sprite("boost"),
                 pos(width() + rand(1200, 1400), height() - 230),
                 area(),
