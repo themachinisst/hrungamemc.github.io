@@ -228,7 +228,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
                     layer("top"),
                     scale(0.55),
                     move(LEFT, SPEED),
-                    cleanup(2),
+                    
                     "bag", // add a tag here
                 ]);
             // wait a random amount of time to spawn next tree
