@@ -385,13 +385,13 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
         //after colliding with boosters
         player.collides("boost", () => {
             BagCollide = false; 
-            SPEED = SPEED + 500;
+            SPEED = SPEED + 100;
             JUMP_FORCE += 200;
-            setTimeout(Boostfunc, 7000);
+            setTimeout(Boostfunc, 10000);
         });
 
         function Boostfunc(){
-            SPEED = SPEED - 500;
+            SPEED = SPEED - 100;
             BagCollide = true;
             JUMP_FORCE -= 200;
         };
