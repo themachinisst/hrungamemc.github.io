@@ -332,6 +332,10 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
                 
                 "boost", // add a tag here
             ]);
+         
+                player.collides("boost", () => {
+                    Boost.destroy();
+                });
             // wait a random amount of time to spawn next tree
             wait(rand(10, 15), (spawnBoost));
             
