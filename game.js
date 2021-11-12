@@ -4,7 +4,7 @@ import kaboom from "https://unpkg.com/kaboom/dist/kaboom.mjs";
   //var kaboom = require('kaboom')
  // initialize kaboom context
  kaboom({
-    width: 800,
+    width: 1000,
     height:400,
     background: [ 255, 255, 255, ],
 });
@@ -267,6 +267,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
                     origin("center"),
                     handleoutCoin(),
                     scale(0.4),
+                    layer("mid"),
                     "SendCoin",
                     {dir: staminapos.sub(center).unit(), },
                 ])
@@ -636,9 +637,9 @@ scene("station", (stamina, score, currency, SPEED) => {
             stamina+=1;
             //currency-=5;
             if(currency<0){
-                go("game", stamina, score, currency=0, SPEED+50, Gender);// go to "game
+                go("game", stamina, score, currency=0, SPEED+30, Gender);// go to "game
             };
-            go("game", stamina, score, currency, SPEED+50, Gender);// go to "game
+            go("game", stamina, score, currency, SPEED+30, Gender);// go to "game
                 
         })
     /*    
@@ -646,7 +647,7 @@ scene("station", (stamina, score, currency, SPEED) => {
         stamina+=11;
         currency-=5;
         burp();
-        wait(3, go("game", stamina, score, currency, SPEED+50, Gender));// go to "lose
+        wait(3, go("game", stamina, score, currency, SPEED+30, Gender));// go to "lose
 
    };
     mouseRelease(Regen);
@@ -709,14 +710,14 @@ scene("menu", () => {
     ])
 
     onClick("Male", ()=>{
-        go("game", stamina = 51, score = 0, currency = 0, SPEED = 600, Gender = 1);
+        go("game", stamina = 51, score = 0, currency = 0, SPEED = 500, Gender = 1);
         //fullscreen(true);
         fullscreen(!isFullscreen());
     })
 
     onClick( "Female", ()=>{
         Gender = 1;
-        go("game", stamina = 51, score = 0, currency = 0, SPEED = 600, Gender = 1);
+        go("game", stamina = 51, score = 0, currency = 0, SPEED = 500, Gender = 1);
         //fullscreen(true);
         fullscreen(!isFullscreen());
     })
