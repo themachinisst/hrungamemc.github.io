@@ -28,6 +28,11 @@
             "-webkit-transform": "rotate(90deg)"
         }); 
     }*/
+    window.addEventListener("orientationchange", function() {
+    if ( window.orientation == 0 || window.orientation == 180){
+        // WHEN IN PORTRAIT MODE
+        window.location.href = 'index.html';
+    }}, false);
     </script>
     
   </body>
