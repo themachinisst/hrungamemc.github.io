@@ -15,8 +15,6 @@ const FLOOR_HEIGHT = 0;//48;
 
 
 
-
-
 loadSprite("man", "assets/trimmed_runmananime_200.png", {
     sliceX: 16,
     sliceY: 1,
@@ -691,7 +689,7 @@ scene("lose",  (score) => {
 
 scene("menu", () => {
 
-
+    fullscreen(true)
     const Male = add([
         sprite("Male"),
         pos(0, 0),
