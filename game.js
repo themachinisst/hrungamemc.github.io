@@ -238,7 +238,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
                     "bag", // add a tag here
                 ]);
             // wait a random amount of time to spawn next tree
-            wait(rand(2, 4), (spawnBags));
+            wait(rand(3, 5), (spawnBags));
             
         }
 
