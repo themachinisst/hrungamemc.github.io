@@ -4,8 +4,8 @@ import kaboom from "https://unpkg.com/kaboom/dist/kaboom.mjs";
   //var kaboom = require('kaboom')
  // initialize kaboom context
  kaboom({
-    width: 1200,
-    height:800,
+    width: 800,
+    height:400,
     background: [ 255, 255, 255, ],
 });
 
