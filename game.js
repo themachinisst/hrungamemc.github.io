@@ -103,6 +103,9 @@ loadSprite("ScoreLabel", "assets/score_text.png");
 loadSprite("StaminaLabel", "assets/stamina_text.png");
 loadSprite("Retry_label", "assets/try_again.png");
 
+//For menu assets 
+loadSprite("Play", "assets/play_button.png");
+
 let SPEED = 500;    
 let score = 0; 
 let currency = 0;
