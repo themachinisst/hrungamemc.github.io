@@ -754,7 +754,7 @@ scene("menu", () => {
         sprite("Male"),
         pos(0, 0),
         origin("topleft"),
-        scale(0.8), //for 100x100
+        scale(0.4), //for 100x100
         area(),
         "Male"
     ])
@@ -763,7 +763,7 @@ scene("menu", () => {
         sprite("Female"),
         pos(width()/2, 0),
         origin("topleft"),
-        scale(0.8), //for 100x100
+        scale(0.4), //for 100x100
         area(),
         "Female"
     ])
