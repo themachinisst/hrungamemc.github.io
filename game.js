@@ -106,6 +106,11 @@ loadSprite("Retry_label", "assets/try_again.png");
 //For menu assets 
 loadSprite("Play", "assets/play_button.png");
 
+//For try again page
+loadSprite("TryAgain", "assets/Pages/tryagain_page.jpg");
+loadSprite("TryButton", "assets/Pages/try_again_button.png");
+
+
 let SPEED = 500;    
 let score = 0; 
 let currency = 0;
@@ -693,24 +698,36 @@ scene("lose",  (score) => {
  
      let BagCollide = true;
         fullscreen(BagCollide);
+ 
+       layers([
+             "bot",
+             "mid",
+             "top"
+         ], "top");
+ 
      add([
-        sprite("Retry_label"),
-        pos(width()/4, height()/2 - 80),
-        origin("center"),
-        scale(0.25),
-        "retry"
+        sprite("TryAgain"),
+        pos(0, 0),
+        origin("topleft"),
+        area(),
+        layer("bot"),
+        "TryAgain"
     ]);
 
     add([
-        sprite("ScoreLabel"),
-        pos(width()/4-50, height()/2),
-        scale(0.25),
-        origin("center"),
+        sprite("TryButton"),
+        pos(width()/4 - 150, height()/2+50),
+        origin("topleft"),
+        area(),
+        scale(0.8),
+        layer("mid"),
+        "TryAgain"
     ]);
 
     add([
         text(score),
-        pos(width()/4 + 150, height()/2+10),
+        pos(width()/4 - 40, height()/2),
+        scale(0.65),
         origin("center"),
     ]);
 
