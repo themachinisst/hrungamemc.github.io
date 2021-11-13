@@ -107,6 +107,11 @@ loadSprite("Retry_label", "assets/try_again.png");
 loadSprite("MainPage", "assets/Pages/mainpage2.jpg");
 loadSprite("Play", "assets/playbutton.png");
 
+//For char choose assets 
+loadSprite("Male", "assets/Pages/MaleChar.png");
+loadSprite("Female", "assets/Pages/FemaleChar.png");
+
+
 //For try again page
 loadSprite("TryAgain", "assets/Pages/tryagain_page.jpg");
 loadSprite("TryButton", "assets/Pages/try_again_button.png");
@@ -749,7 +754,7 @@ scene("menu", () => {
         sprite("Male"),
         pos(0, 0),
         origin("topleft"),
-        scale(1.5), //for 100x100
+        scale(0.8), //for 100x100
         area(),
         "Male"
     ])
@@ -758,7 +763,7 @@ scene("menu", () => {
         sprite("Female"),
         pos(width()/2, 0),
         origin("topleft"),
-        scale(1.5), //for 100x100
+        scale(0.8), //for 100x100
         area(),
         "Female"
     ])
