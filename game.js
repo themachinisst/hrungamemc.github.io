@@ -14,7 +14,7 @@ import kaboom from "https://unpkg.com/kaboom/dist/kaboom.mjs";
 const FLOOR_HEIGHT = 0;//48;
 
 
-
+/*
 loadSprite("man", "assets/trimmed_runmananime_200.png", {
     sliceX: 16,
     sliceY: 1,
@@ -34,24 +34,25 @@ loadSprite("man", "assets/trimmed_runmananime_200.png", {
         },
     }
 });
+*/
 
-/*
 loadSprite("man", "assets/runmananime.png", {
     sliceX: 24,
     sliceY: 1,
     anims:{
         "jump":{
-            from: 23,
-            to: 23,
+            from: 4,
+            to: 4,
         },
         "run":{
             from:0,
             to:22,
             loop: true,
+            speed: 30,
         },
     }
 });
-*/
+
 loadSprite("bag1", "assets/bags/bag1.png");
 loadSprite("bag2", "assets/bags/bag2.png");
 loadSprite("bag3", "assets/bags/bag3.png");
