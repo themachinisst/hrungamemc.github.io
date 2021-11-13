@@ -93,8 +93,8 @@ loadSprite("Plus", "assets/station/plus.png");
 loadSound("coinsound", "./assets/audio/Pick Coin.mp3");
 
 //For menu assets 
-loadSprite("Male", "assets/MaleChar.png");
-loadSprite("Female", "assets/FemaleChar.png");
+loadSprite("Male", "assets/Pages/MaleChar.png");
+loadSprite("Female", "assets/Pages/FemaleChar.png");
 
 
 //For ingame text 
