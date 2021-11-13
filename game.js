@@ -112,9 +112,7 @@ let Gender = 0;
  let Damage = 0;
 
 scene("game", (stamina, score, currency, SPEED, Gender) => {
- 
-    let BagCollide = true;
-    fullscreen(BagCollide);
+
  
         layers([
             "bot",
@@ -726,7 +724,9 @@ scene("lose",  (score) => {
 
 
 scene("menu", () => {
-
+    
+    let BagCollide = true;
+    fullscreen(BagCollide);
     
     const Male = add([
         sprite("Male"),
@@ -759,8 +759,29 @@ scene("menu", () => {
         fullscreen(true);
     })
 })
+scene("main", () => {
+    
+    let BagCollide = true;
+    fullscreen(BagCollide);
+
+    const Play = add([
+        sprite("Play"),
+        pos(0, 0),
+        origin("topleft"),
+        scale(1.5), //for 100x100
+        area(),
+        "Play"
+    ])
+
+    onClick("Play", ()=>{
+        go("menu");
+        //fullscreen(true);
+    })
+
+})
 
 //go("station");
-go("menu");
+//go("menu");
+go("main");
 //go("game", stamina, score, currency, SPEED);
 //go("menu");
