@@ -786,8 +786,8 @@ scene("menu", () => {
 })
 scene("main", () => {
     
-    let BagCollide = true;
-    fullscreen(BagCollide);
+    //let BagCollide = true;
+    //fullscreen(BagCollide);
     layers([
              "bot",
              "mid",
