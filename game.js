@@ -109,8 +109,8 @@ loadSprite("MainPage", "assets/Pages/mainpage2.jpg");
 loadSprite("Play", "assets/playbutton.png");
 
 //For char choose assets 
-loadSprite("Male", "assets/Pages/MaleChar.png");
-loadSprite("Female", "assets/Pages/FemaleChar.png");
+loadSprite("Male", "assets/Pages/MaleChar.jpg");
+loadSprite("Female", "assets/Pages/FemaleChar.jpg");
 
 
 //For try again page
@@ -200,7 +200,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
         
 
        //add background city
-       for(let j=0; j<50; j++){
+       for(let j=0; j<30; j++){
           add([
               sprite("city"),
               pos(1200*j,0),
@@ -214,7 +214,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
       };
          
         //add background train loop
-        for(let i=0;i<80;i+=2){
+        for(let i=0;i<60;i+=2){
             add([
                 sprite("train"),
                 pos((850)*i, 0),
