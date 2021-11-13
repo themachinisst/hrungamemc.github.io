@@ -104,7 +104,8 @@ loadSprite("StaminaLabel", "assets/stamina_text.png");
 loadSprite("Retry_label", "assets/try_again.png");
 
 //For menu assets 
-loadSprite("Play", "assets/play_button.png");
+loadSprite("MainPage", "assets/Pages/mainpage2.jpg");
+loadSprite("Play", "assets/playbutton.png");
 
 //For try again page
 loadSprite("TryAgain", "assets/Pages/tryagain_page.jpg");
@@ -779,12 +780,21 @@ scene("main", () => {
     
     let BagCollide = true;
     fullscreen(BagCollide);
-
-    const Play = add([
-        sprite("Play"),
+ 
+    add([
+        sprite("MainPage"),
         pos(0, 0),
         origin("topleft"),
-        scale(1.5), //for 100x100
+        //scale(1.5), //for 100x100
+        area(),
+        "MainPage"
+    ])
+ 
+     const Play = add([
+        sprite("Play"),
+        pos(width()/2-100, height()/2+80),
+        origin("topleft"),
+        scale(0.7), //for 100x100
         area(),
         "Play"
     ])
