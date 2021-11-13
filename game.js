@@ -112,7 +112,10 @@ let Gender = 0;
  let Damage = 0;
 
 scene("game", (stamina, score, currency, SPEED, Gender) => {
-   
+ 
+    let BagCollide = true;
+    fullscreen(BagCollide) 
+  
     let BagCollide = true;
         layers([
             "bot",
