@@ -661,18 +661,6 @@ scene("station", (stamina, score, currency, SPEED) => {
         onClick("Chai", ()=>{
             heal(Chai.pos);
         })
- 
-        touchStart( "VadaPav", ()=>{
-                   heal(VadaPav.pos);
-               })
-
-        touchStart("NimbuPani", ()=>{
-            heal(NimbuPani.pos);
-        })
-
-        touchStart("Chai", ()=>{
-            heal(Chai.pos);
-        })
      
         onUpdate("Plus", (m) => {
             m.move(m.dir.scale(SPEED/2))
