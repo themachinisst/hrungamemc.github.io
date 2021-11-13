@@ -36,7 +36,7 @@ loadSprite("man", "assets/trimmed_runmananime_200.png", {
 });
 */
 
-loadSprite("man", "assets/runmananime.png", {
+loadSprite("man", "assets/runmananime_2.png", {
     sliceX: 24,
     sliceY: 1,
     anims:{
