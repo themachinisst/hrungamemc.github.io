@@ -657,6 +657,18 @@ scene("station", (stamina, score, currency, SPEED) => {
         onUpdate("Plus", (m) => {
             m.move(m.dir.scale(SPEED/2))
         })
+ 
+        onTouchStart( "VadaPav", ()=>{
+            heal(VadaPav.pos);
+        })
+
+        onTouchStart("NimbuPani", ()=>{
+            heal(NimbuPani.pos);
+        })
+
+        onTouchStart("Chai", ()=>{
+            heal(Chai.pos);
+        })
 
         on("out", "Plus", (m) => {
             destroy(m)
