@@ -26,7 +26,8 @@
     
   <script>
     //For fullscreen
-    function gameWindow() {
+    var elem = document.getElementById("gameWindow");
+    function openFullscreen() {
       if (elem.requestFullscreen) {
         elem.requestFullscreen();
       } else if (elem.webkitRequestFullscreen) { /* Safari */
