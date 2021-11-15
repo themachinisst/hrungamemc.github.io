@@ -108,6 +108,9 @@ loadSprite("nimbu", "assets/station/nimbupaani.png");
 loadSprite("chai", "assets/station/teastall.png");
 loadSprite("CharBack", "assets/station/charback.png");
 loadSprite("Plus", "assets/station/plus.png");
+loadSprite("TapRech", "assets/station/TapToRechargeSingle.png");
+loadSprite("RunBut", "assets/station/RunButton.png");
+loadSprite("DisRunBut", "assets/station/DisRunButton.png");
 
 //For sound
 loadSound("coinsound", "./assets/audio/Pick Coin.mp3");
@@ -650,7 +653,40 @@ scene("station", (stamina, score, currency, SPEED) => {
             scale(0.4),
             layer("top"),
         ])
+        
+            //add instruction text label    
+         add([
+            sprite("TapRech"),
+            pos(180, 50),
+            scale(0.4),
+            layer("top"),
+        ])
+ 
+         add([
+                sprite("DisRunBut"),
+                pos(620, 140),
+                scale(0.5),
+                area(),
+                layer("top"),
+                "RunBut"
+            ])
+        
+            function RunBut(){
+                //add run button 
+                const RunBut = add([
+                    sprite("RunBut"),
+                    pos(620, 140),
+                    scale(0.5),
+                    area(),
+                    layer("top"),
+                    "RunBut"
+                ])
 
+                onClick("RunBut", ()=>{
+                    go("game", stamina, score, currency, SPEED+30, Gender);// go to "game
+                    destroy(RunBut);
+                })
+            };
 
         function handleout(){
             return{
@@ -664,7 +700,10 @@ scene("station", (stamina, score, currency, SPEED) => {
                         spos.y<0 ||
                         spos.y>height()
                     ){
-                        this.trigger("out")
+                         if( stamina>=5){
+                            RunBut()
+                        };
+                        //this.trigger("out")
                     }
                 }
             }
@@ -705,17 +744,17 @@ scene("station", (stamina, score, currency, SPEED) => {
 
         on("out", "Plus", (m) => {
             destroy(m)
-            stamina+=1;
+            stamina +=5;
             //currency-=5;
             if(currency<0){
-                go("game", stamina, score, currency=0, SPEED+30, Gender);// go to "game
+                go("game", stamina+1, score, currency=0, SPEED+30, Gender);// go to "game
             };
             go("game", stamina, score, currency, SPEED+30, Gender);// go to "game
                 
         })
     /*    
    function Regen(){
-        stamina+=11;
+        stamina+=5;
         currency-=5;
         burp();
         wait(3, go("game", stamina, score, currency, SPEED+30, Gender));// go to "lose
