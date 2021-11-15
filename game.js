@@ -200,7 +200,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
         
 
        //add background city
-       for(let j=0; j<30; j++){
+       for(let j=0; j<25; j++){
           add([
               sprite("city"),
               pos(1200*j,0),
@@ -214,7 +214,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
       };
          
         //add background train loop
-        for(let i=0;i<60;i+=2){
+        for(let i=0;i<50;i+=2){
             add([
                 sprite("train"),
                 pos((850)*i, 0),
