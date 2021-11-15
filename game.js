@@ -164,7 +164,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
             charSprite = "female"
 
         const player = add([
-            sprite("man", {
+            sprite(charSprite, {
                 anims: "run",
             }),
             pos(50, height()),
