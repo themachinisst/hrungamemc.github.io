@@ -53,6 +53,25 @@ loadSprite("man", "assets/runmananime_2.png", {
     }
 });
 
+
+loadSprite("female", "assets/runfemaleanime.png", {
+    sliceX: 24,
+    sliceY: 1,
+    anims:{
+        "jump":{
+            from: 4,
+           to: 4,
+        },
+        "run":{
+            from:0,
+            to:22,
+            loop: true,
+            speed: 30,
+        },
+    }
+});
+
+
 loadSprite("bag1", "assets/bags/bag1.png");
 loadSprite("bag2", "assets/bags/bag2.png");
 loadSprite("bag3", "assets/bags/bag3.png");
@@ -138,6 +157,11 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
         ], "top");
 
         gravity(1800);
+ 
+        var charSprite = "man"
+
+        if(Gender == 1)
+            charSprite = "female"
 
         const player = add([
             sprite("man", {
@@ -200,7 +224,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
         
 
        //add background city
-       for(let j=0; j<25; j++){
+       for(let j=0; j<20; j++){
           add([
               sprite("city"),
               pos(1200*j,0),
@@ -439,7 +463,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
                     if(Damage==3){
                         shake();
                         destroy(player);
-                        go("lose", Math.floor(score));// go to "lose" scene here
+                        go("lose", Math.floor(score), Gender);// go to "lose" scene here
                         burp();
                         shake(10);
                         Damage = 0;
@@ -447,7 +471,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
                     if(Damage>0 && stamina<=10){
                         shake();
                         destroy(player);
-                        go("lose", Math.floor(score));// go to "lose" scene here
+                        go("lose", Math.floor(score), Gender);// go to "lose" scene here
                         burp();
                         shake(10);
                         Damage = 0;
@@ -480,9 +504,9 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
             staminaLabel.color = rgb( 255*Damage, 255 - 155*Damage, 0);
             if(stamina < 1){
                 if(currency>=5){
-                    go("station",Math.floor(stamina), Math.floor(score), currency, SPEED);// go to "lose
+                    go("station",Math.floor(stamina), Math.floor(score), currency, SPEED, Gender);// go to "lose
                 }else{
-                    go("lose", Math.floor(score));
+                    go("lose", Math.floor(score), Gender);
                 };
             };
         });        
@@ -702,7 +726,7 @@ scene("station", (stamina, score, currency, SPEED) => {
 })
 
 //Scene after lost/ colliding with the bag
-scene("lose",  (score) => {
+scene("lose",  (score, Gender) => {
  
      //let BagCollide = true;
      //fullscreen(BagCollide);
@@ -824,20 +848,11 @@ scene("main", () => {
 })
 
 
-scene("LoadScreen", () => {
-    
-    load(new Promise((resolve, reject) => {
-        // anything you want to do that stalls the game in loading state
-        resolve("ok")
-        go("main");
-    }))
-
-})
 
 
 
 //go("station");
-//go("menu");
-go("LoadScreen");
+go("main");
+//go("LoadScreen");
 //go("game", stamina, score, currency, SPEED);
 //go("menu");
