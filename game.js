@@ -128,8 +128,8 @@ let Gender = 0;
 
 scene("game", (stamina, score, currency, SPEED, Gender) => {
 
-        let BagCollide = true;
-        fullscreen(BagCollide);
+        //let BagCollide = true;
+        //fullscreen(BagCollide);
       
         layers([
             "bot",
@@ -491,8 +491,9 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
 
 scene("station", (stamina, score, currency, SPEED) => {
  
-    let BagCollide = true;
-    fullscreen(BagCollide);
+    //let BagCollide = true;
+    //fullscreen(BagCollide);
+ 
     gravity(2000);
     layers([
         "bot",
@@ -703,8 +704,8 @@ scene("station", (stamina, score, currency, SPEED) => {
 //Scene after lost/ colliding with the bag
 scene("lose",  (score) => {
  
-     let BagCollide = true;
-        fullscreen(BagCollide);
+     //let BagCollide = true;
+     //fullscreen(BagCollide);
  
        layers([
              "bot",
@@ -740,8 +741,8 @@ scene("lose",  (score) => {
     ]);
 
     // go back to game with space is pressed
-    keyPress("TryButton", "space", () => go("game", stamina, score=0, currency, SPEED, Gender));
-    mouseClick("TryButton", () => go("game", stamina, score=0, currency, SPEED, Gender));
+    //keyPress("TryButton", "space", () => go("game", stamina, score=0, currency, SPEED, Gender));
+    onClick("TryButton", () => go("game", stamina, score=0, currency, SPEED, Gender));
 
 });
 
@@ -749,8 +750,8 @@ scene("lose",  (score) => {
 
 scene("menu", () => {
     
-    let BagCollide = true;
-    fullscreen(BagCollide);
+    //let BagCollide = true;
+    //fullscreen(BagCollide);
     
    
  
