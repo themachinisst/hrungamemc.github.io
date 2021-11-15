@@ -129,7 +129,7 @@ let Gender = 0;
 scene("game", (stamina, score, currency, SPEED, Gender) => {
 
         let BagCollide = true;
-        //fullscreen(BagCollide);
+        fullscreen(BagCollide);
       
         layers([
             "bot",
