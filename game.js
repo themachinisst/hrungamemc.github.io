@@ -721,7 +721,7 @@ scene("lose",  (score) => {
         "TryAgain"
     ]);
 
-    add([
+    const TryButton = add([
         sprite("TryButton"),
         pos(width()/4 - 150, height()/2+50),
         origin("topleft"),
@@ -739,8 +739,8 @@ scene("lose",  (score) => {
     ]);
 
     // go back to game with space is pressed
-    keyPress("space", () => go("game", stamina, score=0, currency, SPEED, Gender));
-    mouseClick(() => go("game", stamina, score=0, currency, SPEED, Gender));
+    keyPress("TryButton", "space", () => go("game", stamina, score=0, currency, SPEED, Gender));
+    onClick("TryButton", () => go("game", stamina, score=0, currency, SPEED, Gender));
 
 });
 
