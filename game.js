@@ -823,8 +823,21 @@ scene("main", () => {
 
 })
 
+
+scene("LoadScreen", () => {
+    
+    load(new Promise((resolve, reject) => {
+        // anything you want to do that stalls the game in loading state
+        resolve("ok")
+        go("main");
+    }))
+
+})
+
+
+
 //go("station");
 //go("menu");
-go("main");
+go("LoadScreen");
 //go("game", stamina, score, currency, SPEED);
 //go("menu");
