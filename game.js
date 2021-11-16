@@ -146,10 +146,11 @@ let currency = 0;
 let stamina = 51;
 let JUMP_FORCE = 600;
 let Gender = 0;
- let Damage = 0;
+
 
 scene("game", (stamina, score, currency, SPEED, Gender) => {
-
+ 
+        let Damage = 0;
         let BagCollide = true;
         fullscreen(BagCollide);
       
