@@ -708,7 +708,8 @@ scene("station", (stamina, score, currency, SPEED) => {
                         spos.y<0 ||
                         spos.y>height()
                     ){
-                        
+                        staminaLabel.text +=5;
+                        currencyLabel.text -=5;
                         this.trigger("out")
                     }
                 }
