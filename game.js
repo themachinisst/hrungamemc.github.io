@@ -756,7 +756,7 @@ scene("station", (stamina, score, currency, SPEED) => {
             destroy(m)
             stamina +=5;
             //currency-=5;
-            if(currency<0){
+            if(currency<=0){
                 go("game", stamina+1, score, currency=0, SPEED+30, Gender);// go to "game
             };
              if(stamina>5){
