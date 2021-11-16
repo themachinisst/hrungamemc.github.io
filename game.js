@@ -101,7 +101,25 @@ loadSprite("coin", "assets/coin_sprite.png", {
 });
 */
 loadSprite("boost", "assets/booster.png");
-//Booster();
+loadSprite("BoostAnim", "assets/BoosterAnim.png", {
+    sliceX: 20,
+    sliceY: 1,
+    anims:{
+        "Boost":{
+            from: 0,
+            to:19,
+            loop: true,
+            speed:15,
+        },
+        "Stop":{
+            from:0,
+            to:0,
+        }
+    }
+});
+
+
+
 //For station assets
 loadSprite("StationBack", "assets/stallbg.png");
 loadSprite("vadapav", "assets/station/vadapavstall.png");
@@ -445,20 +463,43 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
             scale(0.4),
             layer("top"),
         ])
+        
+        let BoostAnim = add([
+            sprite("BoostAnim", {
+                anims: "Boost",
+            }),
+            pos(50, height()),
+            origin("botleft"),
+            layer("top"),
+            scale(0.8), //for 100x100
+            //scale(0.5),//for 1080
+            area(),
+            "BoostAnim"
+        ]);
 
+        function follow(loc){
+            BoostAnim.pos = loc;
+        }
+
+        BoostAnim.action(() =>{
+            follow(player.pos);
+        })
 
         //after colliding with boosters
         player.collides("boost", () => {
             BagCollide = false; 
-            SPEED = SPEED + 100;
+            //SPEED = SPEED + 100;
             JUMP_FORCE += 200;
-            setTimeout(Boostfunc, 10000);
+            BoostAnim.play("Boost");
+            setTimeout(Boostfunc, 7000);
         });
 
         function Boostfunc(){
-            SPEED = SPEED - 100;
+            //SPEED = SPEED - 100;
             BagCollide = true;
             JUMP_FORCE -= 200;
+            BoostAnim.play("Stop");
+            //debug.log("stop")
         };
 
         // lose if player collides with any game obj with tag "bag"
