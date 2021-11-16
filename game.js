@@ -811,12 +811,13 @@ scene("lose",  (score, Gender) => {
  
      let ButtonCont = add([
         sprite("BoundBox"),
-        pos(width()/4-180, height()/2+40),
+        pos(width()/4-200, height()/2+20),
         origin("topleft"),
-        scale(3), //for 100x100
+        scale(4), //for 100x100
         area(),
         "ButtonCont"
     ])
+
 
     add([
         text(score),
@@ -895,11 +896,11 @@ scene("main", () => {
         "Play"
     ])
      
-     let ButtonCont = add([
+      let ButtonCont = add([
         sprite("BoundBox"),
-        pos(width()/2-150, height()/2+60),
+        pos(width()/2-200, height()/2+50),
         origin("topleft"),
-        scale(3), //for 100x100
+        scale(4), //for 100x100
         area(),
         "ButtonCont"
     ])
