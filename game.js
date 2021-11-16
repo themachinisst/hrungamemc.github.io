@@ -7,6 +7,7 @@ import kaboom from "https://unpkg.com/kaboom/dist/kaboom.mjs";
     width: 800,
     height:400,
     background: [ 255, 255, 255, ],
+    touchToMouse: true,
 });
 
 //loadFont("MCFont", "./assets/Font/MCFont.png", 6, 8);
