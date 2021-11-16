@@ -535,7 +535,7 @@ scene("station", (stamina, score, currency, SPEED) => {
     
     const VadaPav = add([
         sprite("vadapav"),
-        pos(width()-500, height()-80),
+        pos(width()-450, height()-80),
         origin("center"),
         layer("mid"),
         area(),
@@ -594,6 +594,7 @@ scene("station", (stamina, score, currency, SPEED) => {
     ]);
 
      //for character 
+    /*
      const PlayerBack = add([
         sprite("CharBack"),
         pos(width()-500, height()),
@@ -602,6 +603,7 @@ scene("station", (stamina, score, currency, SPEED) => {
         scale(0.8),
         layer("top")
     ]);
+    */
      //for platform
      add([
         rect(width(), FLOOR_HEIGHT),
