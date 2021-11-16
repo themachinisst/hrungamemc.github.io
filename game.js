@@ -866,18 +866,11 @@ scene("main", () => {
     //let BagCollide = true;
     //fullscreen(BagCollide);
  
-    layers([
-             "bot",
-             "mid",
-             "top"
-         ], "top");
- 
     add([
         sprite("MainPage"),
         pos(0, 0),
         origin("topleft"),
         //scale(1.5), //for 100x100
-        layer("bot"),
         area(),
         "MainPage"
     ])
@@ -887,7 +880,6 @@ scene("main", () => {
         pos(width()/2-100, height()/2+80),
         origin("topleft"),
         scale(0.7), //for 100x100
-        //layer("top"),
         area(),
         "Play"
     ])
