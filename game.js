@@ -893,7 +893,7 @@ scene("main", () => {
         "ButtonCont"
     ])
 
-    onClick("Play", ()=>{
+    onClick("ButtonCont", ()=>{
         go("menu");
         //fullscreen(true);
     })
