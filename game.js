@@ -663,31 +663,38 @@ scene("station", (stamina, score, currency, SPEED) => {
             layer("top"),
         ])
  
-         add([
-                sprite("DisRunBut"),
+        var dispButton = false
+        var RunButStatus = "DisRunBut";
+
+        let RunButton = add([
+            sprite(RunButStatus),
+            pos(620, 140),
+            scale(0.5),
+            area(),
+            layer("top"),
+            "RunBut"
+        ])
+        
+        function RunBut(){
+        //add run button 
+        if(!dispButton){
+            RunButton = add([
+                sprite(RunButStatus),
                 pos(620, 140),
                 scale(0.5),
                 area(),
                 layer("top"),
+                cleanup(2),
                 "RunBut"
             ])
+            dispButton = true;
+        };
+        onClick("RunBut", ()=>{
+            go("game", stamina, score, currency, SPEED+30, Gender);// go to "game
+        })
         
-            function RunBut(){
-                //add run button 
-                const RunBut = add([
-                    sprite("RunBut"),
-                    pos(620, 140),
-                    scale(0.5),
-                    area(),
-                    layer("top"),
-                    "RunBut"
-                ])
+    };
 
-                onClick("RunBut", ()=>{
-                    go("game", stamina, score, currency, SPEED+30, Gender);// go to "game
-                    destroy(RunBut);
-                })
-            };
 
         function handleout(){
             return{
@@ -748,9 +755,10 @@ scene("station", (stamina, score, currency, SPEED) => {
             if(currency<0){
                 go("game", stamina+1, score, currency=0, SPEED+30, Gender);// go to "game
             };
-             if(stamina>=5){
-                            RunBut()
-            };
+             if(stamina>5){
+                RunButStatus = "RunBut";
+            }
+            RunBut()
             //go("game", stamina, score, currency, SPEED+30, Gender);// go to "game
                 
         })
