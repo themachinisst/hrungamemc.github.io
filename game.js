@@ -107,7 +107,7 @@ loadSprite("StationBack", "assets/stallbg.png");
 loadSprite("vadapav", "assets/station/vadapavstall.png");
 loadSprite("nimbu", "assets/station/nimbupaani.png");
 loadSprite("chai", "assets/station/teastall.png");
-loadSprite("CharBack", "assets/station/charback.png");
+//loadSprite("CharBack", "assets/station/charback.png");
 loadSprite("Plus", "assets/station/plus.png");
 loadSprite("TapRech", "assets/station/TapToRechargeSingle.png");
 loadSprite("RunBut", "assets/station/RunButton.png");
@@ -397,7 +397,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
             
         }
 
-        //start spawning trees
+        //start spawning bags
         spawnBoost();
 
     
