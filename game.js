@@ -700,10 +700,8 @@ scene("station", (stamina, score, currency, SPEED) => {
                         spos.y<0 ||
                         spos.y>height()
                     ){
-                         if( stamina>=5){
-                            RunBut()
-                        };
-                        //this.trigger("out")
+                        
+                        this.trigger("out")
                     }
                 }
             }
@@ -749,7 +747,10 @@ scene("station", (stamina, score, currency, SPEED) => {
             if(currency<0){
                 go("game", stamina+1, score, currency=0, SPEED+30, Gender);// go to "game
             };
-            go("game", stamina, score, currency, SPEED+30, Gender);// go to "game
+             if(stamina>=5){
+                            RunBut()
+            };
+            //go("game", stamina, score, currency, SPEED+30, Gender);// go to "game
                 
         })
     /*    
