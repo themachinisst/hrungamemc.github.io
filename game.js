@@ -583,7 +583,7 @@ scene("station", (stamina, score, currency, SPEED) => {
         origin("center"),
         layer("mid"),
         area(),
-        scale(0.23),
+        scale(0.25),
         "VadaPav"
     ]);
 
