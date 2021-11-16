@@ -662,7 +662,7 @@ scene("station", (stamina, score, currency, SPEED) => {
             scale(0.4),
             layer("top"),
         ])
-        
+        currencyLabel.color = rgb(255, 215, 0);
             //add instruction text label    
          add([
             sprite("TapRech"),
@@ -673,7 +673,11 @@ scene("station", (stamina, score, currency, SPEED) => {
  
         var dispButton = false
         var RunButStatus = "DisRunBut";
-
+        
+       if(stamina<=5){
+        dispButton = false
+        }
+ 
         let RunButton = add([
             sprite(RunButStatus),
             pos(620, 140),
@@ -730,8 +734,6 @@ scene("station", (stamina, score, currency, SPEED) => {
         function heal(loc){
             const center = vec2(loc)
             const staminapos = vec2(450, 24)
-                stamina+=5;
-                currency-=5;
                 add([
                     pos(center),
                     sprite("Plus"),
@@ -763,11 +765,11 @@ scene("station", (stamina, score, currency, SPEED) => {
         on("out", "Plus", (m) => {
             destroy(m)
             stamina +=5;
-            //currency-=5;
+            currency-=5;
             if(currency<=0){
                 go("game", stamina+1, score, currency=0, SPEED+30, Gender);// go to "game
             };
-             if(stamina>5){
+             if(stamina>=5){
                 RunButStatus = "RunBut";
             }
             RunBut()
