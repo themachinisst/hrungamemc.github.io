@@ -468,6 +468,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
                     Damage+=1;
                     shake(10);
                     stamina-=10;
+                 /*
                     if(Damage==3){
                         shake();
                         destroy(player);
@@ -484,6 +485,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
                         shake(10);
                         Damage = 0;
                     };
+                   */
                 });
         };
 
@@ -512,7 +514,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
             staminaLabel.color = rgb( 255*Damage, 255 - 155*Damage, 0);
             if(stamina < 1){
                 if(currency>=5){
-                    go("station",Math.floor(stamina), Math.floor(score), currency, SPEED, Gender);// go to "lose
+                    go("station",stamina=0, Math.floor(score), currency, SPEED, Gender);// go to "lose
                 }else{
                     go("lose", Math.floor(score), Gender);
                 };
