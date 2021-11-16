@@ -141,6 +141,8 @@ loadSprite("TryAgain", "assets/Pages/tryagain_page.jpg");
 loadSprite("TryButton", "assets/Pages/try_again_button.png");
 
 
+loadSprite("BoundBox", "assets/boundingbox.png");
+
 let SPEED = 500;    
 let score = 0; 
 let currency = 0;
@@ -806,6 +808,15 @@ scene("lose",  (score, Gender) => {
         layer("top"),
         "TryButton"
     ]);
+ 
+     let ButtonCont = add([
+        sprite("BoundBox"),
+        pos(width()/4-180, height()/2+40),
+        origin("topleft"),
+        scale(3), //for 100x100
+        area(),
+        "ButtonCont"
+    ])
 
     add([
         text(score),
@@ -816,8 +827,8 @@ scene("lose",  (score, Gender) => {
     ]);
 
     // go back to game with space is pressed
-    //keyPress("TryButton", "space", () => go("game", stamina, score=0, currency, SPEED, Gender));
-    onClick("TryButton", () => go("game", stamina, score=0, currency, SPEED, Gender));
+    //keyPress("ButtonCont", "space", () => go("game", stamina, score=0, currency, SPEED, Gender));
+    onClick("ButtonCont", () => go("game", stamina, score=0, currency, SPEED, Gender));
 
 });
 
@@ -884,11 +895,11 @@ scene("main", () => {
         "Play"
     ])
      
-     const ButtonCont = add([
-        sprite("Play"),
-        pos(width()/2-200, height()/2),
+     let ButtonCont = add([
+        sprite("BoundBox"),
+        pos(width()/2-150, height()/2+60),
         origin("topleft"),
-        scale(1.5), //for 100x100
+        scale(3), //for 100x100
         area(),
         "ButtonCont"
     ])
