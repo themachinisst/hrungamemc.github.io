@@ -115,6 +115,7 @@ loadSprite("DisRunBut", "assets/station/DisRunButton.png");
 
 //For sound
 loadSound("coinsound", "./assets/audio/Pick Coin.mp3");
+loadSound("MCReg", "./assets/audio/MCReg.mp3");
 
 //For menu assets 
 loadSprite("Male", "assets/Pages/MaleChar.jpg");
@@ -696,6 +697,9 @@ scene("station", (stamina, score, currency, SPEED) => {
         };
         onClick("RunBut", ()=>{
             go("game", stamina, score, currency, SPEED+30, Gender);// go to "game
+           play("MCReg", {
+                  volume: 1.5
+              });
         })
         
     };
