@@ -865,6 +865,7 @@ scene("main", () => {
     
     //let BagCollide = true;
     //fullscreen(BagCollide);
+ 
     layers([
              "bot",
              "mid",
@@ -886,9 +887,18 @@ scene("main", () => {
         pos(width()/2-100, height()/2+80),
         origin("topleft"),
         scale(0.7), //for 100x100
-        layer("top"),
+        //layer("top"),
         area(),
         "Play"
+    ])
+     
+     const ButtonCont = add([
+        sprite("Play"),
+        pos(width()/2-200, height()/2),
+        origin("topleft"),
+        scale(1.5), //for 100x100
+        area(),
+        "ButtonCont"
     ])
 
     onClick("Play", ()=>{
@@ -897,9 +907,6 @@ scene("main", () => {
     })
 
 })
-
-
-
 
 
 //go("station");
