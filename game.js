@@ -556,8 +556,10 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
             if(stamina < 1){
                 if(currency>=5){
                     go("station",stamina=0, Math.floor(score), currency, SPEED, Gender);// go to "lose
+                 Damage = 0;
                 }else{
                     go("lose", Math.floor(score), Gender);
+                 Damage = 0;
                 };
             };
         });        
