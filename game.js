@@ -509,6 +509,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
                     Damage+=1;
                     shake(10);
                     stamina-=10;
+                     navigator.vibrate(200)
                  /*
                     if(Damage==3){
                         shake();
