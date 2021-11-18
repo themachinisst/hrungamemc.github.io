@@ -561,7 +561,8 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
                     Damage+=1;
                     shake(10);
                     stamina-=10;
-                    //navigator.vibrate(200)
+                    if(iOSDevice)
+                        navigator.vibrate(200)
                     play("BagAud", {
                           volume: 1
                       });
