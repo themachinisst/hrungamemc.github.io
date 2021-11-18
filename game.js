@@ -208,7 +208,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
             layer("top"),
             //scale(1.5), //for 100x100
             //scale(0.3),//for 1080
-            scale(0.85),//for 200
+            scale(0.8),//for 200
             area(),
             body(),
         ]);
@@ -561,7 +561,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
                     Damage+=1;
                     shake(10);
                     stamina-=10;
-                    navigator.vibrate(200)
+                    //navigator.vibrate(200)
                     play("BagAud", {
                           volume: 1
                       });
