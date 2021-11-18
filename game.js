@@ -8,6 +8,7 @@ import kaboom from "https://unpkg.com/kaboom/dist/kaboom.mjs";
     height:400,
     background: [ 255, 255, 255, ],
     touchToMouse: true,
+    logMax: 5,
 });
 
 //loadFont("MCFont", "./assets/Font/MCFont.png", 6, 8);
@@ -81,7 +82,12 @@ loadSprite("bag3", "assets/bags/bag3.png");
 //loadSprite("train", "assets/trainBack.png");
 loadSprite("train", "assets/test.png");
 //loadSprite("train", "assets/doubletrain.png");
+//BG Assets
 loadSprite("city", "assets/bg.jpg");
+loadSprite("BGday", "assets/BG/day.jpg");
+loadSprite("BGevening", "assets/BG/evening.jpg");
+loadSprite("BGnight", "assets/BG/night.jpg");
+
 loadSprite("coin", "assets/coin.png");
 /*
 loadSprite("coin", "assets/coin_sprite.png", {
@@ -133,9 +139,12 @@ loadSprite("DisRunBut", "assets/station/DisRunButton.png");
 
 //For sound
 loadSound("coinsound", "./assets/audio/Pick Coin.mp3");
+loadSound("TryAgain", "./assets/audio/Try Again.mp3");
+loadSound("BagAud", "./assets/audio/BagColAud.mp3");
+loadSound("BoostAud", "./assets/audio/energy power up.mp3");
 loadSound("MCReg", "./assets/audio/MCReg.mp3");
 
-//For menu assets 
+//For char choose assets 
 loadSprite("Male", "assets/Pages/MaleChar.jpg");
 loadSprite("Female", "assets/Pages/FemaleChar.jpg");
 
@@ -158,9 +167,10 @@ loadSprite("Female", "assets/Pages/FemaleChar.jpg");
 //For try again page
 loadSprite("TryAgain", "assets/Pages/tryagain_page.jpg");
 loadSprite("TryButton", "assets/Pages/try_again_button.png");
-
+loadSprite("HomeBut", "assets/homebutton.png");
 
 loadSprite("BoundBox", "assets/boundingbox.png");
+
 
 let SPEED = 500;    
 let score = 0; 
@@ -248,12 +258,12 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
             color(127, 200, 255),
         ]);
         
-
+       var BackCity = choose(["BGday", "BGnight", "BGday"])
        //add background city
        for(let j=0; j<40; j++){
           add([
-              sprite("city"),
-              pos(1200*j,0),
+              sprite(BackCity),//sprite("city"),
+              pos(1200*j,-10),
               origin("topleft"),
               area(),
               scale(0.3),
@@ -277,7 +287,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
                 "train"
             ]);
         }
-  
+   /*
         //add background city
         add([
             sprite("city"),
@@ -289,7 +299,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
             layer("bot"),
         ]);
         
-
+ */
 
         // For spawning bags in loop
         function spawnBags(){
@@ -360,7 +370,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
         //For adding coins
         function spawnCoins(){
                     //add coins  
-                const coin = add([
+                let coin = add([
                     sprite("coin", {
                        // anims: "rot",
                     }),
@@ -386,18 +396,57 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
             })
                 
             // wait a random amount of time to spawn next tree
-            wait(rand(4, 5), (spawnCoins));
+            wait(rand(2, 3), (spawnCoins));
         }
 
          //start spawning trees
         spawnCoins();
+        
+        
+        var Coin2Pos = 0
+        //to spawn multiple coins together 
+        function spawnMulCoins(){
+                //add coins  
+
+                let coin2 = add([
+                    sprite("coin", {
+                        //anims: "rot",
+                    }),
+                    pos(width() + rand(100, 300), height()- rand(200, 300)),
+                    area(),
+                    origin("botleft"),
+                    layer("top"),
+                    scale(0.6),
+                    move(LEFT, SPEED),
+                    "coin2", // add a tag here
+                ]);
+
+
+                //coin.play("rot");
+                //add score for every coin
+                Coin2Pos = coin2.pos
+                var coin2Height = coin2.pos.y
+                player.collides("coin2", () => {
+                    coin2.destroy();
+                });
+
+            coin2.action(()=>{
+                coin2.pos.y = wave(coin2Height, coin2Height-20, time()*5);
+            })
+
+            // wait a random amount of time to spawn next coin
+            wait(rand(5,7), (spawnMulCoins));
+        }
+
+        //start spawning coins
+        spawnMulCoins();
 
         //For spawning boosters
         function spawnBoost(){
                 //add coins 
             var Boost = add([
                 sprite("boost"),
-                pos(width() + rand(1200, 1400), height() - 230),
+                pos(width() + rand(2000, 2500), height() - 230),
                 area(),
                 origin("botleft"),
                 layer("top"),
@@ -411,7 +460,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
                     Boost.destroy();
                 });
             // wait a random amount of time to spawn next tree
-            wait(rand(10, 15), (spawnBoost));
+            wait(rand(12, 15), (spawnBoost));
             
         }
 
@@ -491,6 +540,9 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
             //SPEED = SPEED + 100;
             JUMP_FORCE += 200;
             BoostAnim.play("Boost");
+           play("BoostAud", {
+                 volume: 1
+             });
             setTimeout(Boostfunc, 7000);
         });
 
@@ -509,7 +561,10 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
                     Damage+=1;
                     shake(10);
                     stamina-=10;
-                     navigator.vibrate(200)
+                    navigator.vibrate(200)
+                    play("BagAud", {
+                          volume: 1
+                      });
                  /*
                     if(Damage==3){
                         shake();
@@ -534,14 +589,25 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
         player.collides("coin", () => {
                     currency = currency + 5;
                     //AnimCoin(CoinPos);
-                    CoinPos = vec2(720, 100)
+                    CoinPos = vec2(710, 100)
                     AnimCoin(CoinPos);
                     play("coinsound", {
                         volume: 0.5
                     });
                 });
 
-
+        
+        player.collides("coin2", () => {
+            currency = currency + 5;
+            //AnimCoin(CoinPos);
+            Coin2Pos = vec2(710, 100)
+            AnimCoin(Coin2Pos);
+            play("coinsound", {
+                volume: 0.5
+            });
+        });
+ 
+ 
         // increment score every frame
         action(() => {
             score+=0.2;
@@ -553,14 +619,20 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
             //stamina calc
             stamina = stamina - (0.01);
             staminaLabel.text = Math.floor(stamina); 
-            staminaLabel.color = rgb( 255*Damage, 255 - 155*Damage, 0);
+            //staminaLabel.color = rgb( 255*Damage, 255 - 155*Damage, 0);
+            staminaLabel.color = rgb( 255-Math.floor(1.5*stamina), 4*Math.floor(stamina), 0);
             if(stamina < 1){
                 if(currency>=5){
                     go("station",stamina=0, Math.floor(score), currency, SPEED, Gender);// go to "lose
-                 Damage = 0;
+                    Damage = 0;
+                    destroyAll("BackCity")
                 }else{
                     go("lose", Math.floor(score), Gender);
-                 Damage = 0;
+                    Damage = 0;
+                    destroyAll("BackCity")
+                    play("TryAgain", {
+                        volume: 1
+                    });
                 };
             };
         });        
@@ -743,12 +815,21 @@ scene("station", (stamina, score, currency, SPEED) => {
                 cleanup(2),
                 "RunBut"
             ])
+         
+           let RunButtonCont = add([
+                sprite("BoundBox"),
+                pos(650, 160),
+                origin("center"),
+                scale(3, 3), //for 100x100
+                area(),
+                "RunButtonCont"
+            ])
             dispButton = true;
         };
         onClick("RunBut", ()=>{
-            go("game", stamina, score, currency, SPEED+30, Gender);// go to "game
+           go("game", stamina, score, currency, SPEED+30, Gender);// go to "game
            play("MCReg", {
-                  volume: 1.5
+                  volume: 1
               });
         })
         
@@ -778,18 +859,48 @@ scene("station", (stamina, score, currency, SPEED) => {
         function heal(loc){
             const center = vec2(loc)
             const staminapos = vec2(450, 24)
-                add([
+                let Plus = add([
                     pos(center),
                     sprite("Plus"),
                     origin("center"),
                     handleout(),
+                    area(),
                     scale(0.5),
                     "Plus",
                     {dir: staminapos.sub(center).unit(), },
                 ])
         };
         
-    
+        let VadaPavButCont = add([
+            sprite("BoundBox"),
+            pos(width()-450, height()-80),
+            origin("center"),
+            scale(2.5, 6), //for 100x100
+            area(),
+            "VadaPavButCont"
+        ])
+
+        let NimbuPaniButCont = add([
+            sprite("BoundBox"),
+            pos(width()-700, height()-80),
+            origin("center"),
+            scale(2.5, 6), //for 100x100
+            area(),
+            "NimbuPaniButCont"
+        ])
+
+        let ChaiButCont = add([
+            sprite("BoundBox"),
+            pos(width()-200, height()-80),
+            origin("center"),
+            scale(2.5, 6), //for 100x100
+            area(),
+            "ChaiButCont"
+        ])
+ 
+ 
+ 
+ 
         onClick( "VadaPav", ()=>{
             heal(VadaPav.pos);
         })
@@ -812,6 +923,9 @@ scene("station", (stamina, score, currency, SPEED) => {
             currency-=5;
             if(currency<=0){
                 go("game", stamina+1, score, currency=0, SPEED+30, Gender);// go to "game
+                play("MCReg", {
+                    volume: 1
+                });
             };
              if(stamina>=5){
                 RunButStatus = "RunBut";
