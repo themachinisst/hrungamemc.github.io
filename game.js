@@ -274,7 +274,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
       };
          
         //add background train loop
-        for(let i=0;i<600;i+=2){
+        for(let i=0;i<500;i+=2){
             add([
                 sprite("train"),
                 pos((850)*i, 0),
