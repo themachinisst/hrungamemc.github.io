@@ -264,7 +264,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
         
        var BackCity = choose(["BGday", "BGnight", "BGday"])
        //add background city
-       for(let j=0; j<60; j++){
+       for(let j=0; j<40; j++){
           add([
               sprite(BackCity),//sprite("city"),
               pos(1200*j,-10),
@@ -278,7 +278,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
       };
          
         //add background train loop
-        for(let i=0;i<400;i+=2){
+        for(let i=0;i<300;i+=2){
             add([
                 sprite("train"),
                 pos((850)*i, 0),
