@@ -901,15 +901,15 @@ scene("station", (stamina, score, currency, SPEED) => {
  
  
  
-        onClick( "VadaPav", ()=>{
+        onClick( "VadaPavButCont", ()=>{
             heal(VadaPav.pos);
         })
 
-        onClick("NimbuPani", ()=>{
+        onClick("NimbuPaniButCont", ()=>{
             heal(NimbuPani.pos);
         })
 
-        onClick("Chai", ()=>{
+        onClick("ChaiButCont", ()=>{
             heal(Chai.pos);
         })
      
