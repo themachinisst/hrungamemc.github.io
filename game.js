@@ -14,7 +14,11 @@ import kaboom from "https://unpkg.com/kaboom/dist/kaboom.mjs";
 //loadFont("MCFont", "./assets/Font/MCFont.png", 6, 8);
 
 const FLOOR_HEIGHT = 0;//48;
-let iOSDevice = !!navigator.platform.match(/iPhone|iPod|iPad/);
+var IOS = false;
+if(/iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent) ) {
+    // run your code here
+    IOS = true
+   }
 
 /*
 loadSprite("man", "assets/trimmed_runmananime_200.png", {
@@ -561,7 +565,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
                     Damage+=1;
                     shake(10);
                     stamina-=10;
-                    if(iOSDevice)
+                    if(!IOS)
                         navigator.vibrate(200)
                     play("BagAud", {
                           volume: 1
