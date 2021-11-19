@@ -185,6 +185,9 @@ let stamina = 51;
 let JUMP_FORCE = 600;
 let Gender = 0;
 
+//defining temp variable for currency to show as many plus signs as currency (no more)
+let currencyActual = 0;
+
 
 scene("game", (stamina, score, currency, SPEED, Gender) => {
  
@@ -651,6 +654,9 @@ scene("station", (stamina, score, currency, SPEED) => {
     //let BagCollide = true;
     //fullscreen(BagCollide);
  
+  //storing currency in currencyActual to match the plus signs
+   currencyActual = currency;
+ 
     gravity(2000);
     layers([
         "bot",
@@ -912,15 +918,24 @@ scene("station", (stamina, score, currency, SPEED) => {
  
  
         onClick( "VadaPavButCont", ()=>{
-            heal(VadaPav.pos);
+            if(currencyActual>=5){
+                currencyActual-=5;
+                heal(VadaPav.pos);
+            }            
         })
 
         onClick("NimbuPaniButCont", ()=>{
-            heal(NimbuPani.pos);
+         if(currencyActual>=5){
+                currencyActual-=5;
+                heal(NimbuPani.pos);
+            }
         })
 
         onClick("ChaiButCont", ()=>{
-            heal(Chai.pos);
+         if(currencyActual>=5){
+                currencyActual-=5;
+                heal(Chai.pos);
+            }
         })
      
         onUpdate("Plus", (m) => {
