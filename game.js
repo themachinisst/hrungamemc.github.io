@@ -174,6 +174,8 @@ loadSprite("TryButton", "assets/Pages/try_again_button.png");
 loadSprite("HomeBut", "assets/homebutton.png");
 
 loadSprite("BoundBox", "assets/boundingbox.png");
+loadSprite("LeftDoor", "assets/level.png");
+loadSprite("RightDoor", "assets/up.png");
 
 
 let SPEED = 500;    
@@ -831,8 +833,11 @@ scene("station", (stamina, score, currency, SPEED) => {
             ])
             dispButton = true;
         };
-        onClick("RunBut", ()=>{
-           go("game", stamina, score, currency, SPEED+30, Gender);// go to "game
+        onClick("RunButtonCont", ()=>{
+          DoorAnim();
+                wait(2, ()=>{
+                    go("game", stamina+1, score, currency, SPEED+30, Gender);// go to "game
+                })
            play("MCReg", {
                   volume: 1
               });
@@ -927,7 +932,10 @@ scene("station", (stamina, score, currency, SPEED) => {
             stamina +=5;
             currency-=5;
             if(currency<=0){
-                go("game", stamina+1, score, currency=0, SPEED+30, Gender);// go to "game
+                DoorAnim();
+                wait(2, ()=>{
+                    go("game", stamina+1, score, currency=0, SPEED+30, Gender);// go to "game
+                })
                 play("MCReg", {
                     volume: 1
                 });
@@ -1034,14 +1042,20 @@ scene("menu", () => {
     ])
 
     onClick("Male", ()=>{
-        go("game", stamina = 51, score = 0, currency = 0, SPEED = 550, Gender = 0);
+        DoorAnim();
+        wait(0.5, ()=>{
+            go("game", stamina = 51, score = 0, currency = 0, SPEED = 600, Gender = 0);
+        })
         //fullscreen(true);
  
     })
 
     onClick( "Female", ()=>{
         Gender = 1;
-        go("game", stamina = 51, score = 0, currency = 0, SPEED = 550, Gender = 1);
+       DoorAnim();
+        wait(2, ()=>{
+            go("game", stamina = 51, score = 0, currency = 0, SPEED = 600, Gender = 1);
+        })
         //fullscreen(true);
    
     })
@@ -1085,6 +1099,108 @@ scene("main", () => {
 
 })
 
+function DoorAnim(){
+
+
+    //debug.log(Status);
+    let Screencenter = vec2(width()/2, 0);
+    let Leftwallpos = vec2(0, 80);
+    let Rightwallpos = vec2(width(), -80);
+
+    function Doorhandleout(){
+        return{
+            id: "Doorhandleout",
+            require: ["pos"],
+            update(){
+                
+                const spos = this.screenPos()
+                if(
+                    //spos.x<0 ||
+                    spos.x>width()/2 ||
+                    //spos.y<0 ||
+                    spos.y>height()/2
+                ){
+                    //debug.log(stamina)
+                        this.trigger("Doorout");
+                }
+            }
+        }
+    }
+
+    function LeftDoorAnim(loc){
+        const center = vec2(loc)
+        const staminapos = Screencenter
+            add([
+                sprite("LeftDoor"),
+                pos(center),
+                origin("topright"),
+                scale(0.38, 0.38), //for 100x100
+                area(),
+                Doorhandleout(),
+                "doorLeft",
+                {dir: staminapos.sub(center).unit(), },
+            ])
+        
+    };
+    
+    function RightDoorAnim(loc){
+        const center = vec2(loc)
+        const staminapos = Screencenter
+        add([
+            sprite("RightDoor"),
+            pos(center),
+            origin("topleft"),
+            scale(0.4, 0.4), //for 100x100
+            area(),
+            Doorhandleout(),
+            "doorRight",
+            {dir: staminapos.sub(center).unit(), },
+        ])
+        
+    };
+
+    LeftDoorAnim(Leftwallpos);
+    RightDoorAnim(Rightwallpos);
+ 
+    onUpdate("doorLeft", (m) => {
+        m.move(m.dir.scale(300))
+    })
+
+    onUpdate("doorRight",  (m) => {
+        m.move(m.dir.scale(300))
+    })
+
+    on("Doorout", "doorLeft", (m) => {
+        /*
+        destroyAll(m);
+        wait(0.5, ()=>{
+            go(Status, stamina , score, currency , SPEED , Gender);
+        })
+        */
+    
+        onUpdate("doorLeft", (m) => {
+            m.move(m.dir.scale(10))
+        })
+    
+        onUpdate("doorRight",  (m) => {
+            m.move(m.dir.scale(10))
+        })
+        
+    })
+
+    //for platform
+    add([
+        rect(width(), FLOOR_HEIGHT),
+        pos(0, height()),
+        outline(4),
+        origin("botleft"),
+        area(),
+        layer("top"),
+        solid(),
+        color(127, 200, 255),
+    ]);
+
+}
 
 //go("station");
 go("main");
