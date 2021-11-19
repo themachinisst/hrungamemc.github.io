@@ -943,10 +943,12 @@ scene("station", (stamina, score, currency, SPEED) => {
              if(stamina>=5){
                 RunButStatus = "RunBut";
             }
-            RunBut()
+            //RunBut()
             //go("game", stamina, score, currency, SPEED+30, Gender);// go to "game
                 
         })
+       RunButStatus = "RunBut";
+        RunBut()
     /*    
    function Regen(){
         stamina+=5;
