@@ -1044,20 +1044,20 @@ scene("menu", () => {
     ])
 
     onClick("Male", ()=>{
-        DoorAnim();
-        wait(0.5, ()=>{
+        //DoorAnim();
+        //wait(0.5, ()=>{
             go("game", stamina = 51, score = 0, currency = 0, SPEED = 600, Gender = 0);
-        })
+       // })
         //fullscreen(true);
  
     })
 
     onClick( "Female", ()=>{
-        Gender = 1;
-       DoorAnim();
-        wait(2, ()=>{
+        //Gender = 1;
+       //DoorAnim();
+        //wait(2, ()=>{
             go("game", stamina = 51, score = 0, currency = 0, SPEED = 600, Gender = 1);
-        })
+        //})
         //fullscreen(true);
    
     })
