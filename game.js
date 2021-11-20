@@ -1107,7 +1107,7 @@ scene("main", () => {
      
       let ButtonCont = add([
         sprite("BoundBox"),
-        pos(width()/2-200, height()/2+10),
+        pos(width()/2-200, height()/2-10),
         origin("topleft"),
         scale(4), //for 100x100
         area(),
