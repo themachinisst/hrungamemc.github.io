@@ -160,7 +160,7 @@ loadSprite("StaminaLabel", "assets/stamina_text.png");
 loadSprite("Retry_label", "assets/try_again.png");
 
 //For menu assets 
-loadSprite("MainPage", "assets/Pages/mainpage2.jpg");
+loadSprite("MainPage", "assets/Pages/MainPage.jpg");
 loadSprite("Play", "assets/playbutton.png");
 
 //For char choose assets 
@@ -1087,10 +1087,12 @@ scene("main", () => {
         pos(0, 0),
         origin("topleft"),
         //scale(1.5), //for 100x100
+        scale(0.4), //for 1920x1080
         area(),
         "MainPage"
     ])
  
+  /*
      const Play = add([
         sprite("Play"),
         pos(width()/2-100, height()/2+80),
@@ -1099,6 +1101,7 @@ scene("main", () => {
         area(),
         "Play"
     ])
+ */
      
       let ButtonCont = add([
         sprite("BoundBox"),
