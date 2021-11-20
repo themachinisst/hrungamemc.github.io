@@ -24,22 +24,14 @@
   }
   </style>
     
-  <script>
-    //For fullscreen
-    var elem = document.getElementById("gameWindow");
-    function openFullscreen() {
-      if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-      } else if (elem.webkitRequestFullscreen) { /* Safari */
-        elem.webkitRequestFullscreen();
-      } else if (elem.msRequestFullscreen) { /* IE11 */
-        elem.msRequestFullscreen();
-      }
-    }
-  </script>
+ 
   </head>
-  <body id = "gameWindow">
-      <script type="module" src="./game.js?n=1"> 
+  <body>
+    <div id="content">
+      <canvas id="mycanvas"></canvas>
+    </div>
+
+      <script type="module" src="./game.js"> 
       </script>
     <script>
     /*
