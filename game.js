@@ -658,6 +658,7 @@ scene("station", (stamina, score, currency, SPEED) => {
  
   //storing currency in currencyActual to match the plus signs
    currencyActual = currency;
+   var showRunBut = true;
  
     gravity(2000);
     layers([
@@ -690,7 +691,7 @@ scene("station", (stamina, score, currency, SPEED) => {
         origin("center"),
         layer("mid"),
         area(),
-        scale(0.25),
+        scale(0.3),
         "NimbuPani"
     ]);
     
@@ -707,7 +708,7 @@ scene("station", (stamina, score, currency, SPEED) => {
         origin("center"),
         layer("mid"),
         area(),
-        scale(0.25),
+        scale(0.3),
         "Chai"
     ]);
 
@@ -806,8 +807,13 @@ scene("station", (stamina, score, currency, SPEED) => {
         var RunButStatus = "DisRunBut";
         
        if(stamina<=5){
-        dispButton = false
+           dispButton = false
         }
+    
+    if(stamina>=5){
+        dispButton = true
+        RunButStatus = "RunBut";
+    }
  
         let RunButton = add([
             sprite(RunButStatus),
@@ -820,37 +826,43 @@ scene("station", (stamina, score, currency, SPEED) => {
         
         function RunBut(){
         //add run button 
-        if(!dispButton){
-            RunButton = add([
-                sprite(RunButStatus),
-                pos(620, 140),
-                scale(0.5),
-                area(),
-                layer("top"),
-                cleanup(2),
-                "RunBut"
-            ])
-         
-           let RunButtonCont = add([
-                sprite("BoundBox"),
-                pos(width()-300, height()-330),
-                origin("center"),
-                scale(3), //for 100x100
-                area(),
-                "RunButtonCont"
-            ])
-            dispButton = true;
-        };
-        onClick("RunButtonCont", ()=>{
-          DoorAnim();
-                wait(2, ()=>{
-                    go("game", stamina+1, score, currency, SPEED+30, Gender);// go to "game
+           if(showRunBut){
+                RunButton = add([
+                    sprite(RunButStatus),
+                    pos(620, 140),
+                    scale(0.5),
+                    area(),
+                    //layer("top"),
+                    cleanup(2),
+                    "RunBut"
+                ])
+                
+                if(dispButton){
+                    let RunButtonCont = add([
+                        sprite("BoundBox"),
+                        pos(width()-300, height()-330),
+                        origin("center"),
+                        layer("top"),
+                        scale(3), //for 100x100
+                        area(),
+                        "RunButtonCont"
+                    ])
+                };
+
+       
+                onClick("RunButtonCont", ()=>{
+                    //go("game", stamina+1, score, currency, SPEED+30, Gender);// go to "game
+                    DoorAnim();
+                    wait(2, ()=>{
+                        go("game", stamina+1, score, currency, SPEED+30, Gender);// go to "game
+                    })
+                    play("MCReg", {
+                        volume: 1
+                    });
+                    
                 })
-           play("MCReg", {
-                  volume: 1
-              });
-        })
-        
+                showRunBut = false
+            };
     };
 
 
@@ -960,12 +972,12 @@ scene("station", (stamina, score, currency, SPEED) => {
              if(stamina>=5){
                 RunButStatus = "RunBut";
             }
-            //RunBut()
+            dispButton = true;
+            RunBut()
             //go("game", stamina, score, currency, SPEED+30, Gender);// go to "game
                 
         })
-       RunButStatus = "RunBut";
-        RunBut()
+        
     /*    
    function Regen(){
         stamina+=5;
