@@ -891,7 +891,7 @@ scene("station", (stamina, score, currency, SPEED) => {
         
         let VadaPavButCont = add([
             sprite("BoundBox"),
-            pos(width()-450, height()-80),
+            pos(width()-450, height()-200),
             origin("center"),
             scale(2.5, 6), //for 100x100
             area(),
@@ -900,7 +900,7 @@ scene("station", (stamina, score, currency, SPEED) => {
 
         let NimbuPaniButCont = add([
             sprite("BoundBox"),
-            pos(width()-700, height()-80),
+            pos(width()-700, height()-200),
             origin("center"),
             scale(2.5, 6), //for 100x100
             area(),
@@ -909,7 +909,7 @@ scene("station", (stamina, score, currency, SPEED) => {
 
         let ChaiButCont = add([
             sprite("BoundBox"),
-            pos(width()-200, height()-80),
+            pos(width()-200, height()-200),
             origin("center"),
             scale(2.5, 6), //for 100x100
             area(),
