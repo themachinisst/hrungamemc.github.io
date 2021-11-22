@@ -1021,13 +1021,31 @@ scene("lose",  (score, Gender) => {
         "TryButton"
     ]);
  
-     let ButtonCont = add([
-        sprite("BoundBox"),
-        pos(width()/4-200, height()/2+20),
+ let HomeButton = add([
+        sprite("HomeBut"),
+        pos(width()/2+200, height()/2-200),
         origin("topleft"),
-        scale(4), //for 100x100
+        scale(0.2), //for 100x100
         area(),
-        "ButtonCont"
+        "HomeButton"
+    ])
+ 
+   let HomeButtonCont = add([
+         sprite("BoundBox"),
+         pos(width()/2-100, height()/2-200),
+         origin("topleft"),
+         scale(2), //for 100x100
+         area(),
+         "HomeButtonCont"
+     ])
+ 
+     let TryButtonCont = add([
+        sprite("BoundBox"),
+        pos(width()/4-200, height()/2-100),
+        origin("topleft"),
+        scale(3), //for 100x100
+        area(),
+        "TryButtonCont"
     ])
 
 
@@ -1041,8 +1059,8 @@ scene("lose",  (score, Gender) => {
 
     // go back to game with space is pressed
     //keyPress("ButtonCont", "space", () => go("game", stamina, score=0, currency, SPEED, Gender));
-    onClick("ButtonCont", () => go("game", stamina, score=0, currency, SPEED, Gender));
-
+    onClick("TryButtonCont", () => go("game", stamina, score=0, currency, SPEED, Gender));
+    onClick("HomeButtonCont", () => go("menu"));
 });
 
 
