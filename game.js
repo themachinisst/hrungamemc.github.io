@@ -283,7 +283,44 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
           ]);
 
       };
-         
+ 
+        const train1 = add([
+            sprite("train"),
+            pos(0, 0),
+            origin("topleft"),
+            area(),
+            scale(0.9),
+            move(LEFT, SPEED),
+            layer("mid"),
+            area(),
+            "train"  
+        ]);
+
+        const train2 = add([
+            sprite("train"),
+            pos(1700, 0),
+            origin("topleft"),
+            area(),
+            scale(0.9),
+            move(LEFT, SPEED),
+            layer("mid"),
+            area(),
+            "train"  
+        ]);
+
+        
+        onUpdate(()=>{
+            console.log(train1.pos.x);
+            if(train1.pos.x<=-1700)
+            {
+                //alert("negative position of train")
+                train1.moveTo(0,0);
+                train2.moveTo(1700,0);
+            }
+        })
+ 
+ 
+  /*
         //add background train loop
         for(let i=0;i<300;i+=2){
             add([
@@ -298,6 +335,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
                 "train"
             ]);
         }
+  */
    /*
         //add background city
         add([
