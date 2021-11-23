@@ -1132,7 +1132,7 @@ scene("menu", () => {
         sprite("BoundBox"),
         pos(0, 0),
         origin("topleft"),
-        scale(3), //for 100x100
+        scale(2, 4), //for 100x100
         area(),
         "MaleButtonCont"
     ])
