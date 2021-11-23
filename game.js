@@ -1130,7 +1130,7 @@ scene("menu", () => {
 
     let MaleButtonCont = add([
         sprite("BoundBox"),
-        pos(0, 0),
+        pos(-100, 0),
         origin("topleft"),
         scale(3, 4), //for 100x100
         area(),
