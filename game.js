@@ -1128,16 +1128,35 @@ scene("menu", () => {
         "Female"
     ])
 
-    onClick("Male", ()=>{
+    let MaleButtonCont = add([
+        sprite("BoundBox"),
+        pos(0, 0),
+        origin("topleft"),
+        scale(3), //for 100x100
+        area(),
+        "MaleButtonCont"
+    ])
+
+    let FemaleButtonCont = add([
+        sprite("BoundBox"),
+        pos(width()/4, 0),
+        origin("topleft"),
+        scale(4), //for 100x100
+        area(),
+        "FemaleButtonCont"
+    ])
+    
+    onClick("MaleButtonCont", ()=>{
+        //go("game", stamina = 51, score = 0, currency = 0, SPEED = 600, Gender = 0);
+        //fullscreen(true);   
         //DoorAnim();
-        //wait(0.5, ()=>{
+        wait(3, ()=>{
             go("game", stamina = 51, score = 0, currency = 0, SPEED = 600, Gender = 0);
-       // })
-        //fullscreen(true);
- 
+        })
     })
 
-    onClick( "Female", ()=>{
+
+    onClick( "FemaleButtonCont", ()=>{
         //Gender = 1;
        //DoorAnim();
         //wait(2, ()=>{
