@@ -150,7 +150,7 @@ loadSound("BagAud", "./assets/audio/BagColAud.mp3");
 loadSound("BoostAud", "./assets/audio/energy power up.mp3");
 loadSound("MCReg", "./assets/audio/MCReg.mp3");
 loadSprite("MuteBut", "assets/mutebutton.png");
-
+loadSound("AudBG", "./assets/audio/BGAudio.mp3");
 //For char choose assets 
 loadSprite("Male", "assets/Pages/MaleChar.jpg");
 loadSprite("Female", "assets/Pages/FemaleChar.jpg");
@@ -191,6 +191,11 @@ let Gender = 0;
 //defining temp variable for currency to show as many plus signs as currency (no more)
 let currencyActual = 0;
 var Mute = false; 
+let BGAud = play("AudBG", {
+    volume: 0.4,
+    loop: true,
+});
+
 
 scene("game", (stamina, score, currency, SPEED, Gender) => {
  
@@ -699,6 +704,12 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
                 
             })
          
+            if(Mute){
+                BGAud.pause();
+            }else{
+                BGAud.play();
+            }
+         
             score+=0.2;
             scoreLabel.text = Math.floor(score) ;
             scoreLabel.color = rgb(255, 255, 255);
@@ -717,6 +728,7 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
                     destroyAll("BackCity")
                 }else{
                     go("lose", Math.floor(score), Gender, Mute);
+                    BGAud.pause();   
                     Damage = 0;
                     destroyAll("BackCity")
                    if(!Mute){
@@ -1248,6 +1260,7 @@ scene("main", () => {
 
     onClick("ButtonCont", ()=>{
         go("menu");
+        BGAud.play();
         //fullscreen(true);
     })
 
