@@ -149,6 +149,7 @@ loadSound("TryAgain", "./assets/audio/Try Again.mp3");
 loadSound("BagAud", "./assets/audio/BagColAud.mp3");
 loadSound("BoostAud", "./assets/audio/energy power up.mp3");
 loadSound("MCReg", "./assets/audio/MCReg.mp3");
+loadSprite("MuteBut", "assets/mutebutton.png");
 
 //For char choose assets 
 loadSprite("Male", "assets/Pages/MaleChar.jpg");
@@ -189,7 +190,7 @@ let Gender = 0;
 
 //defining temp variable for currency to show as many plus signs as currency (no more)
 let currencyActual = 0;
-
+var Mute = false; 
 
 scene("game", (stamina, score, currency, SPEED, Gender) => {
  
@@ -589,9 +590,11 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
             //SPEED = SPEED + 100;
             JUMP_FORCE += 200;
             BoostAnim.play("Boost");
-           play("BoostAud", {
-                 volume: 1
-             });
+            if(!Mute){
+                play("BoostAud", {
+                    volume: 1
+                });
+            }
             setTimeout(Boostfunc, 7000);
         });
 
@@ -612,9 +615,11 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
                     stamina-=10;
                     if(!IOS)
                         navigator.vibrate(200)
-                    play("BagAud", {
-                          volume: 1
-                      });
+                    if(!Mute){
+                        play("BagAud", {
+                            volume: 1
+                        });
+                    }
                  /*
                     if(Damage==3){
                         shake();
@@ -641,9 +646,11 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
                     //AnimCoin(CoinPos);
                     CoinPos = vec2(710, 100)
                     AnimCoin(CoinPos);
-                    play("coinsound", {
-                        volume: 0.5
-                    });
+                    if(!Mute){
+                        play("coinsound", {
+                            volume: 0.5
+                        });
+                   };
                 });
 
         
@@ -652,14 +659,46 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
             //AnimCoin(CoinPos);
             Coin2Pos = vec2(710, 100)
             AnimCoin(Coin2Pos);
-            play("coinsound", {
-                volume: 0.5
-            });
+            if(!Mute){
+                play("coinsound", {
+                    volume: 0.5
+                });
+            }
         });
+ 
+        let MuteButton = add([
+            sprite("MuteBut"),
+            pos(width()- 128, height()/2-213),
+            origin("topleft"),
+            scale(0.18), //for 100x100
+            area(),
+            layer("top"),
+            "MuteButton"
+        ])
+    
+        let MuteButtonCont = add([
+            sprite("BoundBox"),
+            pos(width()/2-100, height()/2-200),
+            origin("topleft"),
+            scale(2), //for 100x100
+            area(),
+            layer("top"),
+            "MuteButtonCont"
+        ])
  
  
         // increment score every frame
         action(() => {
+         
+             onClick("MuteButtonCont", ()  => {
+                if(Mute){
+                    Mute = false;
+                }else{
+                    Mute = true
+                }
+                
+            })
+         
             score+=0.2;
             scoreLabel.text = Math.floor(score) ;
             scoreLabel.color = rgb(255, 255, 255);
@@ -673,23 +712,25 @@ scene("game", (stamina, score, currency, SPEED, Gender) => {
             staminaLabel.color = rgb( 255-Math.floor(1.5*stamina), 4*Math.floor(stamina), 0);
             if(stamina < 1){
                 if(currency>=5){
-                    go("station",stamina=0, Math.floor(score), currency, SPEED, Gender);// go to "lose
+                    go("station",stamina=0, Math.floor(score), currency, SPEED, Gender, Mute);// go to "lose
                     Damage = 0;
                     destroyAll("BackCity")
                 }else{
-                    go("lose", Math.floor(score), Gender);
+                    go("lose", Math.floor(score), Gender, Mute);
                     Damage = 0;
                     destroyAll("BackCity")
-                    play("TryAgain", {
-                        volume: 1
-                    });
+                   if(!Mute){
+                        play("TryAgain", {
+                            volume: 1
+                        });
+                    }
                 };
             };
         });        
 
 });
 
-scene("station", (stamina, score, currency, SPEED) => {
+scene("station", (stamina, score, currency, SPEED, Gender, Mute) => {
  
     //let BagCollide = true;
     //fullscreen(BagCollide);
@@ -894,9 +935,11 @@ scene("station", (stamina, score, currency, SPEED) => {
                     wait(2, ()=>{
                         go("game", stamina+1, score, currency, SPEED+30, Gender);// go to "game
                     })
-                    play("MCReg", {
-                        volume: 1
-                    });
+                    if(!Mute){
+                        play("MCReg", {
+                            volume: 1
+                        });
+                    }
                     
                 })
                 showRunBut = false
@@ -1001,11 +1044,13 @@ scene("station", (stamina, score, currency, SPEED) => {
             if(currency<=0){
                 DoorAnim();
                 wait(2, ()=>{
-                    go("game", stamina+1, score, currency=0, SPEED+30, Gender);// go to "game
+                    go("game", stamina+1, score, currency=0, SPEED+30, Gender, Mute);// go to "game
                 })
-                play("MCReg", {
-                    volume: 1
-                });
+                if(!Mute){
+                    play("MCReg", {
+                        volume: 1
+                    });
+                }
             };
              if(stamina>=5){
                 RunButStatus = "RunBut";
@@ -1097,7 +1142,7 @@ scene("lose",  (score, Gender) => {
 
     // go back to game with space is pressed
     //keyPress("ButtonCont", "space", () => go("game", stamina, score=0, currency, SPEED, Gender));
-    onClick("TryButtonCont", () => go("game", stamina, score=0, currency, SPEED, Gender));
+    onClick("TryButtonCont", () => go("game", stamina, score=0, currency, SPEED, Gender, Mute));
     onClick("HomeButtonCont", () => go("menu"));
 });
 
@@ -1147,11 +1192,11 @@ scene("menu", () => {
     ])
     
     onClick("MaleButtonCont", ()=>{
-        //go("game", stamina = 51, score = 0, currency = 0, SPEED = 600, Gender = 0);
+        //go("game", stamina = 51, score = 0, currency = 0, SPEED = 600, Gender = 0, Mute);
         //fullscreen(true);   
         //DoorAnim();
         wait(3, ()=>{
-            go("game", stamina = 51, score = 0, currency = 0, SPEED = 600, Gender = 0);
+            go("game", stamina = 51, score = 0, currency = 0, SPEED = 600, Gender = 0, Mute);
         })
     })
 
